@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0b18">
+  <title>ShopEase | Discover Something Better</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="announcement">
+    ✦ Discover something better. Free shipping on orders over ₹1,999.
+  </div>
+
+  <header class="header">
+    <a class="logo" href="#" aria-label="ShopEase home">
+      <span class="logo-mark">S</span> ShopEase<span class="logo-dot">.</span>
+    </a>
+
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#shop">Shop</a>
+      <a href="#footer">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="accountBtn" aria-label="Account">♙</button>
+      <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">
+        ♡ <span id="wishlistCount" class="count">0</span>
+      </button>
+      <button class="cart-btn" id="cartBtn">
+        🛍 <span>Cart</span> <span id="cartCount" class="count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="eyebrow"><span class="live-dot"></span> THE NEW SHOPPING EXPERIENCE</span>
+        <h1>Find your next<br> <span>favourite thing.</span></h1>
+        <p>Thoughtfully picked essentials, standout designs and everyday upgrades. All in one place.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#shop">Explore collection <span>↗</span></a>
+          <a class="text-btn" href="#categories">Browse categories ↓</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>225+</strong><span>Products</span></div>
+          <div><strong>15</strong><span>Categories</span></div>
+          <div><strong>24/7</strong><span>Browse online</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-glow"></div>
+        <div class="hero-orbit orbit-one"></div>
+        <div class="hero-orbit orbit-two"></div>
+        <div class="hero-product product-main">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30b?auto=format&fit=crop&w=800&q=85" alt="Premium headphones">
+          <span class="floating-label">THE EDIT · 01</span>
+        </div>
+        <div class="floating-card floating-top">
+          <span class="mini-icon">✦</span>
+          <div><strong>Curated for you</strong><small>Everyday upgrades</small></div>
+        </div>
+        <div class="floating-card floating-bottom">
+          <span class="mini-icon">↗</span>
+          <div><strong>Discover more</strong><small>Your next favourite find</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benefits">
+      <div><span>✧</span><div><strong>Curated collection</strong><small>Explore all your favourites</small></div></div>
+      <div><span>◇</span><div><strong>Secure demo checkout</strong><small>No real payments processed</small></div></div>
+      <div><span>↺</span><div><strong>Easy order tracking</strong><small>Review saved demo orders</small></div></div>
+    </section>
+
+    <section class="section categories-section" id="categories">
+      <div class="section-heading">
+        <div><span class="eyebrow">EXPLORE YOUR INTERESTS</span><h2>Shop by category<span class="accent">.</span></h2></div>
+        <span class="subtle">15 collections to discover</span>
+      </div>
+      <div class="category-grid" id="categoryGrid"></div>
+    </section>
+
+    <section class="section shop-section" id="shop">
+      <div class="section-heading">
+        <div><span class="eyebrow">THE SHOP</span><h2>Made for your everyday<span class="accent">.</span></h2></div>
+        <span class="subtle" id="resultCount">225 products</span>
+      </div>
+
+      <div class="shop-toolbar">
+        <label class="search-box">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search 225 products..." autocomplete="off">
+          <kbd>/</kbd>
+        </label>
+        <select id="sortSelect" aria-label="Sort products">
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: low to high</option>
+          <option value="price-high">Price: high to low</option>
+          <option value="rating">Top rated</option>
+          <option value="name">Name: A to Z</option>
+        </select>
+      </div>
+
+      <div class="filter-row" id="filterRow"></div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty-state hidden" id="emptyState">
+        <span>⌕</span><h3>No products found</h3>
+        <p>Try another search or choose a different category.</p>
+        <button class="primary-btn" id="resetFilters">View all products</button>
+      </div>
+      <div class="load-more-wrap">
+        <button class="secondary-btn" id="loadMoreBtn">Load more products ↓</button>
+      </div>
+    </section>
+
+    <section class="promo">
+      <div><span class="eyebrow">YOUR NEXT DISCOVERY</span><h2>Good finds.<br><span>Better everyday.</span></h2><p>Explore a collection built around the things you love.</p></div>
+      <a class="primary-btn" href="#shop">Explore all products ↗</a>
+      <div class="promo-orb"></div>
+    </section>
+
+    <section class="section account-section" id="account">
+      <div class="section-heading">
+        <div><span class="eyebrow">YOUR SHOPPING SPACE</span><h2>Your account<span class="accent">.</span></h2></div>
+      </div>
+      <div class="account-grid">
+        <article class="account-card">
+          <span class="account-symbol">♙</span><h3>Welcome to ShopEase</h3>
+          <p id="accountMessage">Sign in or create a local demo account to personalize your shopping experience.</p>
+          <button class="primary-btn" id="loginOpenBtn">Sign in / Register</button>
+          <button class="text-btn hidden" id="logoutBtn">Sign out</button>
+        </article>
+        <article class="account-card">
+          <span class="account-symbol">♡</span><h3>Your wishlist</h3>
+          <p>Keep track of products you'd love to revisit.</p>
+          <button class="secondary-btn" id="viewWishlistBtn">View wishlist</button>
+        </article>
+        <article class="account-card">
+          <span class="account-symbol">▤</span><h3>Your orders</h3>
+          <p>View orders placed through this browser's demo checkout.</p>
+          <button class="secondary-btn" id="viewOrdersBtn">View orders</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <div class="footer-main">
+      <div><a class="logo" href="#"><span class="logo-mark">S</span> ShopEase<span class="logo-dot">.</span></a><p>Discover something better.<br>Your everyday shopping destination.</p></div>
+      <div><strong>Explore</strong><a href="#shop">All products</a><a href="#categories">Categories</a><a href="#home">Featured collection</a></div>
+      <div><strong>Your account</strong><a href="#account">Profile</a><a href="#account" id="footerOrdersLink">Orders</a><a href="#account" id="footerWishlistLink">Wishlist</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 ShopEase. Demo storefront.</span><span>Designed for a better everyday.</span></div>
+  </footer>
+
+  <div class="overlay hidden" id="overlay"></div>
+
+  <aside class="drawer hidden" id="cartDrawer" aria-label="Shopping cart">
+    <div class="drawer-header"><div><span class="eyebrow">YOUR BAG</span><h2>Shopping cart</h2></div><button class="close-btn" data-close aria-label="Close">✕</button></div>
+    <div class="drawer-body" id="cartItems"></div>
+    <div class="drawer-footer" id="cartFooter"></div>
+  </aside>
+
+  <aside class="drawer hidden" id="wishlistDrawer" aria-label="Wishlist">
+    <div class="drawer-header"><div><span class="eyebrow">SAVED FOR LATER</span><h2>Your wishlist</h2></div><button class="close-btn" data-close aria-label="Close">✕</button></div>
+    <div class="drawer-body" id="wishlistItems"></div>
+  </aside>
+
+  <section class="modal hidden" id="productModal" role="dialog" aria-modal="true" aria-label="Product details">
+    <button class="close-btn modal-close" data-close aria-label="Close">✕</button>
+    <div id="productDetails"></div>
+  </section>
+
+  <section class="modal small-modal hidden" id="accountModal" role="dialog" aria-modal="true" aria-label="Account sign in">
+    <button class="close-btn modal-close" data-close aria-label="Close">✕</button>
+    <span class="eyebrow">YOUR SHOPPING SPACE</span><h2 id="accountModalTitle">Welcome back.</h2>
+    <p class="modal-description">Sign in or create a local demo account.</p>
+    <div class="auth-tabs"><button class="auth-tab active" data-auth="login">Sign in</button><button class="auth-tab" data-auth="register">Create account</button></div>
+    <form id="accountForm">
+      <label class="form-field" id="nameField">Full name<input id="authName" autocomplete="name" placeholder="Your name"></label>
+      <label class="form-field">Email address<input id="authEmail" type="email" required autocomplete="email" placeholder="you@example.com"></label>
+      <label class="form-field">Password<input id="authPassword" type="password" required minlength="6" autocomplete="current-password" placeholder="At least 6 characters"></label>
+      <p class="form-error" id="authError"></p>
+      <button class="primary-btn full-btn" type="submit" id="authSubmit">Sign in</button>
+    </form>
+    <p class="fine-print">Demo only: account details are stored locally in this browser. Do not use a real password.</p>
+  </section>
+
+  <section class="modal hidden" id="checkoutModal" role="dialog" aria-modal="true" aria-label="Checkout">
+    <button class="close-btn modal-close" data-close aria-label="Close">✕</button>
+    <span class="eyebrow">ALMOST YOURS</span><h2>Checkout.</h2>
+    <p class="modal-description">Enter delivery details to create a demo order. No payment will be taken.</p>
+    <div class="checkout-summary" id="checkoutSummary"></div>
+    <form id="checkoutForm">
+      <label class="form-field">Full name<input id="shippingName" required autocomplete="name" placeholder="Recipient name"></label>
+      <label class="form-field">Email address<input id="shippingEmail" required type="email" autocomplete="email" placeholder="you@example.com"></label>
+      <label class="form-field">Delivery address<textarea id="shippingAddress" required rows="3" autocomplete="street-address" placeholder="House number, street, city, PIN code"></textarea></label>
+      <label class="form-field">Payment method<select id="paymentMethod"><option value="Cash on delivery (demo)">Cash on delivery (demo)</option><option value="Demo payment">Demo payment (no charge)</option></select></label>
+      <p class="fine-print">This frontend demo does not process real payments or send delivery requests.</p>
+      <button class="primary-btn full-btn" type="submit">Place demo order ↗</button>
+    </form>
+  </section>
+
+  <section class="modal hidden" id="ordersModal" role="dialog" aria-modal="true" aria-label="Your orders">
+    <button class="close-btn modal-close" data-close aria-label="Close">✕</button>
+    <span class="eyebrow">YOUR SHOPPING HISTORY</span><h2>Your orders.</h2>
+    <div id="ordersList" class="orders-list"></div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
