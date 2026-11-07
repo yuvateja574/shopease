@@ -153,8 +153,16 @@ const photoByCategory = [
   "photo-1492144534655-ae79c964c9d7",
   "photo-1524592094714-0f0654e20314"
 ];
-
-const products = categories.flatMap((category, categoryIndex) =>
+// Individual product images
+const photoByProduct = {
+  "Wireless Headphones": "./images/products/wireless-headphones.jpg",
+  "Smart Watch": "./images/products/smart-watch.jpg",
+  "Bluetooth Speaker": "./images/products/bluetooth-speaker.jpg",
+  "Mechanical Keyboard": "./images/products/mechanical-keyboard.jpg",
+  "wireless mouse": "./images/products/wireless-mouse.jpg"
+};
+ const products= categories.flatMap((category, categoryIndex) =>
+  // Individual product images
   category.names.map((name, itemIndex) => {
     const id = categoryIndex * 15 + itemIndex + 1;
     const price = 299 + ((id * 137 + categoryIndex * 89) % 4700);
@@ -170,7 +178,8 @@ const products = categories.flatMap((category, categoryIndex) =>
       discount,
       rating: Number((4.0 + ((id * 7) % 10) / 10).toFixed(1)),
       reviews: 12 + ((id * 19) % 430),
-      image: imageURL(photoByCategory[categoryIndex] || category.image),
+      image: photoByProduct[name] ||
+       imageURL(photoByCategory[categoryIndex] || category.image),
       description:
         `${name} from our ${category.name} collection. ` +
         "A thoughtfully selected everyday essential, designed for style, convenience and everyday use.",
@@ -178,6 +187,11 @@ const products = categories.flatMap((category, categoryIndex) =>
     };
   })
 );
+console.log("Wireless Headphones image:",
+  photoByProduct["Wireless Headphones"]);
+
+console.log("Generated product:",
+  products.find(p => p.name === "Wireless Headphones"));
 
 let cart = readStore(STORAGE.cart, []);
 let wishlist = readStore(STORAGE.wishlist, []);
