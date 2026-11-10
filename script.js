@@ -424,6 +424,7 @@ document.addEventListener("error", event => {
     img.src = "https://placehold.co/650x650/19192c/c9bbff?text=ShopEase";
   }
 }, true);
+
 function saveCart() {
   writeStore(STORAGE.cart, cart);
   updateCounts();
@@ -790,7 +791,6 @@ function renderCart() {
     </button>
   `;
 }
-
 /* ---------------- Wishlist ---------------- */
 
 function toggleWishlist(id) {
@@ -863,6 +863,7 @@ function renderWishlist() {
     `;
   }).join("");
 }
+
 /* ---------------- Drawer and modal handling ---------------- */
 
 function openPanel(element) {
@@ -1456,8 +1457,14 @@ function initializeShopEase() {
   }
 }
 
+
 /* ==========================================
-   ShopEase - Horizontal Auto Banner Slider
+   ShopEase - Continuous Auto Banner Slider
+========================================== */
+
+
+/* ==========================================
+   ShopEase - Automatic Promotional Carousel
 ========================================== */
 
 (function initializeLandscapeBanners() {
@@ -1471,75 +1478,117 @@ function initializeShopEase() {
     return;
   }
 
-  const cards = [...track.querySelectorAll(".se-promo-card")];
-  const dots = [...dotsContainer.querySelectorAll("button")];
+  let cards = [...track.querySelectorAll(".se-promo-card")];
 
-  if (!cards.length) return;
+  if (cards.length < 2) return;
 
   let currentIndex = 0;
   let autoplay = null;
+  let isAnimating = false;
 
   const reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  function getStep() {
-    if (cards.length < 2) return cards[0].offsetWidth;
-
-    return cards[1].offsetLeft - cards[0].offsetLeft;
-  }
-
-  function getMaximumIndex() {
-    const step = getStep();
-    if (!step) return 0;
-
-    return Math.max(
-      0,
-      Math.ceil(
-        (viewport.scrollWidth - viewport.clientWidth) / step
-      )
-    );
-  }
+  // Create one navigation dot for every original banner.
+  dotsContainer.innerHTML = cards.map((card, index) => `
+    <button
+      type="button"
+      aria-label="Go to banner ${index + 1}"
+      class="${index === 0 ? "active" : ""}"
+    ></button>
+  `).join("");
 
   function updateDots() {
-    const maximum = getMaximumIndex();
-
-    dots.forEach((dot, index) => {
-      dot.classList.toggle(
-        "active",
-        index === Math.min(currentIndex, maximum)
-      );
+    [...dotsContainer.querySelectorAll("button")].forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentIndex);
     });
   }
 
-  function moveTo(index) {
-    const maximum = getMaximumIndex();
+  function getStep() {
+    const first = track.querySelector(".se-promo-card");
+    if (!first) return 0;
 
-    if (index > maximum) {
-      index = 0;
+    const styles = getComputedStyle(track);
+    const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+
+    return first.getBoundingClientRect().width + gap;
+  }
+
+  function finishMove(direction) {
+    if (direction === "next") {
+      track.appendChild(track.firstElementChild);
+      currentIndex = (currentIndex + 1) % cards.length;
+    } else {
+      track.insertBefore(track.lastElementChild, track.firstElementChild);
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
     }
 
-    if (index < 0) {
-      index = maximum;
-    }
-
-    currentIndex = index;
-
-    viewport.scrollTo({
-      left: currentIndex * getStep(),
-      behavior: reducedMotion ? "auto" : "smooth"
-    });
-
+    track.style.transition = "none";
+    track.style.transform = "translateX(0)";
     updateDots();
+    isAnimating = false;
+  }
+
+  function move(direction) {
+    if (isAnimating) return;
+
+    const step = getStep();
+    if (!step) return;
+
+    isAnimating = true;
+
+    if (direction === "next") {
+      track.style.transition = reducedMotion
+        ? "none"
+        : "transform .65s ease-in-out";
+
+      track.style.transform = `translateX(-${step}px)`;
+
+      if (reducedMotion) {
+        finishMove("next");
+      } else {
+        track.addEventListener("transitionend", function handler() {
+          track.removeEventListener("transitionend", handler);
+          finishMove("next");
+        });
+      }
+    } else {
+      track.style.transition = "none";
+      track.insertBefore(track.lastElementChild, track.firstElementChild);
+      track.style.transform = `translateX(-${step}px)`;
+
+      // Force the browser to apply the starting position.
+      track.offsetHeight;
+
+      track.style.transition = reducedMotion
+        ? "none"
+        : "transform .65s ease-in-out";
+
+      track.style.transform = "translateX(0)";
+
+      if (reducedMotion) {
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        updateDots();
+        isAnimating = false;
+      } else {
+        track.addEventListener("transitionend", function handler() {
+          track.removeEventListener("transitionend", handler);
+          currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+          updateDots();
+          isAnimating = false;
+        });
+      }
+    }
   }
 
   function startAutoplay() {
     stopAutoplay();
 
-    if (reducedMotion) return;
+    if (reducedMotion || document.hidden) return;
 
     autoplay = setInterval(() => {
-      moveTo(currentIndex + 1);
+      move("next");
     }, 3500);
   }
 
@@ -1547,42 +1596,44 @@ function initializeShopEase() {
     clearInterval(autoplay);
   }
 
-  previous.addEventListener("click", () => {
-    moveTo(currentIndex - 1);
-    startAutoplay();
-  });
-
   next.addEventListener("click", () => {
-    moveTo(currentIndex + 1);
+    move("next");
     startAutoplay();
   });
 
-  dots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      moveTo(index);
-      startAutoplay();
-    });
+  previous.addEventListener("click", () => {
+    move("previous");
+    startAutoplay();
+  });
+
+  dotsContainer.addEventListener("click", event => {
+    const dot = event.target.closest("button");
+    if (!dot) return;
+
+    const targetIndex = [...dotsContainer.children].indexOf(dot);
+    if (targetIndex < 0) return;
+
+    stopAutoplay();
+
+    let difference =
+      (targetIndex - currentIndex + cards.length) % cards.length;
+
+    if (difference > cards.length / 2) {
+      difference -= cards.length;
+    }
+
+    const direction = difference < 0 ? "previous" : "next";
+
+    for (let i = 0; i < Math.abs(difference); i++) {
+      setTimeout(() => move(direction), i * 750);
+    }
+
+    startAutoplay();
   });
 
   viewport.addEventListener("mouseenter", stopAutoplay);
   viewport.addEventListener("mouseleave", startAutoplay);
 
-  viewport.addEventListener("scroll", () => {
-    const step = getStep();
-
-    if (step > 0) {
-      currentIndex = Math.round(viewport.scrollLeft / step);
-      updateDots();
-    }
-  }, { passive: true });
-
-  window.addEventListener("resize", () => {
-    currentIndex = 0;
-    viewport.scrollLeft = 0;
-    updateDots();
-  });
-
-  // Pause autoplay when the browser tab is hidden.
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
       stopAutoplay();
@@ -1591,8 +1642,14 @@ function initializeShopEase() {
     }
   });
 
+  window.addEventListener("resize", () => {
+    track.style.transition = "none";
+    track.style.transform = "translateX(0)";
+  });
+
   updateDots();
   startAutoplay();
 })();
+
 
 initializeShopEase();
