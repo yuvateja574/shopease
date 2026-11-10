@@ -2436,3 +2436,577 @@ footer { padding: 40px 7% 0; background: #090912; border-top: 1px solid var(--bo
         flex: 1;
     }
 }
+/* =========================================
+   ShopEase - Full Size Hero Carousel
+========================================= */
+
+.se3-carousel {
+  position: relative;
+  width: 100%;
+  height: 610px;
+  min-height: 560px;
+  margin: 0;
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  background: #0d0b19;
+}
+
+.se3-carousel-track {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.se3-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 70px 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(45px);
+  transition: opacity .7s ease, transform .7s ease, visibility .7s;
+}
+
+.se3-slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.se3-slide-content {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+}
+
+.se3-slide-tag {
+  color: #a98aff;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.se3-slide-content h2 {
+  color: #f7f3ff;
+  font-size: clamp(45px, 5vw, 76px);
+  line-height: 1.12;
+  font-weight: 800;
+  margin: 25px 0;
+}
+
+.se3-slide-content p {
+  color: #bdb4d6;
+  font-size: 19px;
+  line-height: 1.8;
+  max-width: 520px;
+}
+
+.se3-slide-btn {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 17px 27px;
+  border-radius: 12px;
+  background: #a68aff;
+  color: #100d24;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.se3-slide-art {
+  position: absolute;
+  right: 13%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(150px, 18vw, 260px);
+  animation: se3Float 3s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,.35));
+}
+
+.se3-slide-number {
+  position: absolute;
+  right: 8%;
+  bottom: 55px;
+  color: #d6caff;
+  font-size: 13px;
+}
+
+.se3-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50%;
+  background: rgba(20,15,40,.75);
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.se3-prev {
+  left: 25px;
+}
+
+.se3-next {
+  right: 25px;
+}
+
+.se3-dots {
+  position: absolute;
+  z-index: 5;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.se3-dot {
+  width: 9px;
+  height: 9px;
+  border: none;
+  border-radius: 20px;
+  background: #777;
+  cursor: pointer;
+}
+
+.se3-dot.active {
+  width: 28px;
+  background: #b69aff;
+}
+
+@keyframes se3Float {
+  0%, 100% { transform: translateY(-50%); }
+  50% { transform: translateY(calc(-50% - 15px)); }
+}
+
+@media(max-width: 700px) {
+  .se3-carousel {
+    height: 540px;
+    min-height: 540px;
+  }
+
+  .se3-slide {
+    padding: 45px 45px;
+  }
+
+  .se3-slide-content h2 {
+    font-size: 40px;
+  }
+
+  .se3-slide-content p {
+    font-size: 15px;
+    max-width: 300px;
+  }
+
+  .se3-slide-art {
+    right: 10%;
+    top: 75%;
+    font-size: 100px;
+    opacity: .35;
+  }
+}
+/* =========================================
+   ShopEase - Correct Hero Carousel Position
+========================================= */
+
+.se3-carousel {
+    position: relative !important;
+    display: block;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    width: 100% !important;
+    max-width: none !important;
+    height: 610px !important;
+    min-height: 610px !important;
+
+    margin: 0 !important;
+    padding: 0;
+    transform: none !important;
+
+    overflow: hidden;
+    border-radius: 0;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.se3-carousel-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.se3-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 60px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.se3-slide-content {
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+}
+
+.se3-slide-art {
+    right: 15%;
+}
+
+.se3-arrow {
+    z-index: 5;
+}
+
+.se3-dots {
+    z-index: 5;
+}
+
+@media (max-width: 700px) {
+    .se3-carousel {
+        height: 540px !important;
+        min-height: 540px !important;
+    }
+
+    .se3-slide {
+        padding: 40px 45px;
+    }
+}
+
+/* ==========================================
+   ShopEase - Landscape Promotional Carousel
+========================================== */
+
+.se-banner-section {
+  width: 100%;
+  padding: 35px 5.5% 30px;
+  overflow: hidden;
+  background: #0d0b19;
+  box-sizing: border-box;
+}
+
+.se-banner-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.se-banner-label {
+  color: #a98aff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.se-banner-header h2 {
+  color: #f5f0ff;
+  font-size: 27px;
+  margin: 7px 0 0;
+}
+
+.se-banner-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.se-banner-controls button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.18);
+  background: #19152a;
+  color: white;
+  font-size: 27px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.se-banner-controls button:hover {
+  background: #a68aff;
+  color: #100d24;
+}
+
+.se-banner-viewport {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.se-banner-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.se-banner-track {
+  display: flex;
+  gap: 22px;
+  width: max-content;
+}
+
+.se-promo-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex: 0 0 calc((min(100vw - 11vw, 1500px) - 44px) / 3);
+  height: 275px;
+
+  padding: 28px;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-radius: 18px;
+
+  scroll-snap-align: start;
+  isolation: isolate;
+}
+
+.se-promo-purple {
+  background: linear-gradient(115deg, #38245f, #7450ad);
+}
+
+.se-promo-blue {
+  background: linear-gradient(115deg, #19375b, #387ba1);
+}
+
+.se-promo-orange {
+  background: linear-gradient(115deg, #693b27, #c27643);
+}
+
+.se-promo-pink {
+  background: linear-gradient(115deg, #5b294d, #a65b8b);
+}
+
+.se-promo-card::after {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 50%;
+  right: 35px;
+  top: 20px;
+  z-index: -1;
+}
+
+.se-promo-content {
+  position: relative;
+  z-index: 2;
+  width: 62%;
+}
+
+.se-promo-tag {
+  color: #e3d4ff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.se-promo-content h3 {
+  color: #fff;
+  font-size: clamp(21px, 2vw, 30px);
+  line-height: 1.2;
+  margin: 15px 0 10px;
+  font-weight: 800;
+}
+
+.se-promo-content p {
+  color: rgba(255,255,255,.83);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.se-promo-content a {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background: #fff;
+  color: #24183b;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  transition: .25s;
+}
+
+.se-promo-content a:hover {
+  background: #e8ddff;
+  transform: translateY(-2px);
+}
+
+.se-promo-card img {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 37%;
+  height: 75%;
+  object-fit: contain;
+  z-index: 1;
+  filter: drop-shadow(0 12px 15px rgba(0,0,0,.25));
+  transition: transform .4s;
+}
+
+.se-promo-card:hover img {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.se-promo-number {
+  position: absolute;
+  bottom: 15px;
+  right: 18px;
+  color: rgba(255,255,255,.55);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.se-banner-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 17px;
+}
+
+.se-banner-bottom > span {
+  color: #9189a9;
+  font-size: 11px;
+}
+
+.se-banner-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.se-banner-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: #625b76;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.se-banner-dots button.active {
+  width: 25px;
+  background: #a98aff;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+  .se-promo-card {
+    flex-basis: 420px;
+    height: 250px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .se-banner-section {
+    padding: 25px 15px;
+  }
+
+  .se-banner-header h2 {
+    font-size: 22px;
+  }
+
+  .se-promo-card {
+    flex-basis: 85vw;
+    height: 230px;
+    padding: 20px;
+  }
+
+  .se-promo-content {
+    width: 68%;
+  }
+
+  .se-promo-content h3 {
+    font-size: 23px;
+  }
+
+  .se-promo-content p {
+    font-size: 12px;
+  }
+
+  .se-promo-card img {
+    width: 36%;
+    right: 8px;
+  }
+
+  .se-banner-bottom > span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .se-banner-viewport {
+    scroll-behavior: auto;
+  }
+
+  .se-promo-card img {
+    transition: none;
+  }
+}
+/* ShopEase promotional banner positioning fix */
+
+.promo-section {
+    position: relative !important;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 35px auto 55px;
+    padding: 0 4%;
+    z-index: 1;
+    overflow: hidden;
+    clear: both;
+}
+
+.promo-section,
+.promo-section * {
+    box-sizing: border-box;
+}
+
+/* Prevent the slider from floating over other sections */
+.promo-section .promo-slider,
+.promo-section .promo-carousel {
+    position: relative !important;
+    width: 100%;
+    height: auto;
+    inset: auto;
+    transform: none;
+}
+
+/* Keep products below the promotional section */
+#shop {
+    position: relative;
+    z-index: 0;
+    clear: both;
+    margin-top: 30px;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    .promo-section {
+        padding: 0 15px;
+        margin: 25px auto 35px;
+    }
+}

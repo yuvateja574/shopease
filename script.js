@@ -1,4 +1,3 @@
-
 "use strict";
 
 /* =========================================================
@@ -39,8 +38,11 @@ function writeStore(key, value) {
 
 function escapeHTML(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;",
-    '"': "&quot;", "'": "&#39;"
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
   })[char]);
 }
 
@@ -58,84 +60,244 @@ function imageURL(id, width = 650) {
 
 const categories = [
   {
-    name: "Electronics", icon: "⌘", color: "#8b76ff",
+    name: "Electronics",
+    icon: "⌘",
+    color: "#8b76ff",
     image: "photo-1498049794561-7780e7231661",
-    names: ["Wireless Headphones", "Smart Watch", "Bluetooth Speaker", "Mechanical Keyboard", "Wireless Mouse", "Portable Charger", "USB-C Hub", "Webcam HD", "Gaming Controller", "Desk Lamp", "Tablet Stand", "Laptop Sleeve", "Earbuds Pro", "Power Bank", "Monitor Light"]
+    names: [
+      "Wireless Headphones", "Smart Watch", "Bluetooth Speaker",
+      "Mechanical Keyboard", "Wireless Mouse", "Portable Charger",
+      "USB-C Hub", "Webcam HD", "Gaming Controller", "Desk Lamp",
+      "Tablet Stand", "Laptop Sleeve", "Earbuds Pro", "Power Bank",
+      "Monitor Light"
+    ]
   },
   {
-    name: "Fashion & Clothing", icon: "✧", color: "#e89dbd",
+    name: "Fashion & Clothing",
+    icon: "✧",
+    color: "#e89dbd",
     image: "photo-1445205170230-053b83016050",
-    names: ["Classic Cotton T-Shirt", "Relaxed Fit Hoodie", "Casual Linen Shirt", "Everyday Denim Jacket", "Comfort Joggers", "Oversized Sweatshirt", "Essential Polo Shirt", "Casual Chinos", "Lightweight Jacket", "Cotton Overshirt", "Everyday Shorts", "Knit Sweater", "Classic Track Pants", "Zip-Up Hoodie", "Weekend Shirt"]
+    names: [
+      "Classic Cotton T-Shirt", "Relaxed Fit Hoodie",
+      "Casual Linen Shirt", "Everyday Denim Jacket",
+      "Comfort Joggers", "Oversized Sweatshirt",
+      "Essential Polo Shirt", "Casual Chinos",
+      "Lightweight Jacket", "Cotton Overshirt",
+      "Everyday Shorts", "Knit Sweater",
+      "Classic Track Pants", "Zip-Up Hoodie", "Weekend Shirt"
+    ]
   },
   {
-    name: "Footwear", icon: "◈", color: "#efad77",
+    name: "Footwear",
+    icon: "◈",
+    color: "#efad77",
     image: "photo-1542291026-7eec264c27ff",
-    names: ["Urban Running Shoes", "Classic White Sneakers", "Everyday Slides", "Trail Walking Shoes", "Canvas High-Tops", "Comfort Sandals", "Minimal Leather Shoes", "Training Sneakers", "Casual Slip-Ons", "Streetwear Sneakers", "Lightweight Trainers", "Daily Walking Shoes", "Sport Sandals", "Classic Loafers", "Active Lifestyle Shoes"]
+    names: [
+      "Urban Running Shoes", "Classic White Sneakers",
+      "Everyday Slides", "Trail Walking Shoes",
+      "Canvas High-Tops", "Comfort Sandals",
+      "Minimal Leather Shoes", "Training Sneakers",
+      "Casual Slip-Ons", "Streetwear Sneakers",
+      "Lightweight Trainers", "Daily Walking Shoes",
+      "Sport Sandals", "Classic Loafers",
+      "Active Lifestyle Shoes"
+    ]
   },
   {
-    name: "Accessories", icon: "◇", color: "#b49aff",
+    name: "Accessories",
+    icon: "◇",
+    color: "#b49aff",
     image: "photo-1523275335684-37898b6baf30",
-    names: ["Minimal Wallet", "Everyday Backpack", "Travel Crossbody Bag", "Classic Belt", "Polarized Sunglasses", "Compact Card Holder", "Canvas Tote Bag", "Everyday Cap", "Laptop Backpack", "Travel Organizer", "Key Organizer", "Minimal Sling Bag", "Leather Card Wallet", "Foldable Umbrella", "Everyday Pouch"]
+    names: [
+      "Minimal Wallet", "Everyday Backpack",
+      "Travel Crossbody Bag", "Classic Belt",
+      "Polarized Sunglasses", "Compact Card Holder",
+      "Canvas Tote Bag", "Everyday Cap",
+      "Laptop Backpack", "Travel Organizer",
+      "Key Organizer", "Minimal Sling Bag",
+      "Leather Card Wallet", "Foldable Umbrella",
+      "Everyday Pouch"
+    ]
   },
   {
-    name: "Home & Living", icon: "⌂", color: "#85d5c2",
+    name: "Home & Living",
+    icon: "⌂",
+    color: "#85d5c2",
     image: "photo-1600210492486-724fe5c67fb0",
-    names: ["Decorative Table Lamp", "Soft Cushion Set", "Minimal Wall Clock", "Ceramic Vase", "Cozy Throw Blanket", "Storage Basket", "Desk Organizer", "Scented Candle", "Decorative Mirror", "Indoor Planter", "Bedside Organizer", "Accent Table Decor", "Cotton Bedsheet Set", "Modern Bookend", "Photo Frame Set"]
+    names: [
+      "Decorative Table Lamp", "Soft Cushion Set",
+      "Minimal Wall Clock", "Ceramic Vase",
+      "Cozy Throw Blanket", "Storage Basket",
+      "Desk Organizer", "Scented Candle",
+      "Decorative Mirror", "Indoor Planter",
+      "Bedside Organizer", "Accent Table Decor",
+      "Cotton Bedsheet Set", "Modern Bookend",
+      "Photo Frame Set"
+    ]
   },
   {
-    name: "Beauty & Personal Care", icon: "✿", color: "#f0a7c5",
+    name: "Beauty & Personal Care",
+    icon: "✿",
+    color: "#f0a7c5",
     image: "photo-1596462502278-27bfdc403348",
-    names: ["Daily Care Kit", "Hydrating Face Cream", "Gentle Face Cleanser", "Travel Grooming Kit", "Body Care Set", "Soft Makeup Brush Set", "Facial Care Essentials", "Hand Care Cream", "Beauty Organizer", "Compact Travel Mirror", "Hair Styling Brush", "Skin Care Pouch", "Daily Moisturizer", "Personal Care Set", "Beauty Travel Kit"]
+    names: [
+      "Daily Care Kit", "Hydrating Face Cream",
+      "Gentle Face Cleanser", "Travel Grooming Kit",
+      "Body Care Set", "Soft Makeup Brush Set",
+      "Facial Care Essentials", "Hand Care Cream",
+      "Beauty Organizer", "Compact Travel Mirror",
+      "Hair Styling Brush", "Skin Care Pouch",
+      "Daily Moisturizer", "Personal Care Set",
+      "Beauty Travel Kit"
+    ]
   },
   {
-    name: "Sports & Fitness", icon: "↗", color: "#90c6ff",
+    name: "Sports & Fitness",
+    icon: "↗",
+    color: "#90c6ff",
     image: "photo-1517836357463-d25dfeac3438",
-    names: ["Training Yoga Mat", "Adjustable Dumbbells", "Resistance Band Set", "Insulated Water Bottle", "Gym Duffel Bag", "Sports Towel Set", "Fitness Jump Rope", "Workout Gloves", "Exercise Ball", "Running Belt", "Stretching Strap", "Gym Shaker Bottle", "Training Cones", "Yoga Block Set", "Sports Backpack"]
+    names: [
+      "Training Yoga Mat", "Adjustable Dumbbells",
+      "Resistance Band Set", "Insulated Water Bottle",
+      "Gym Duffel Bag", "Sports Towel Set",
+      "Fitness Jump Rope", "Workout Gloves",
+      "Exercise Ball", "Running Belt",
+      "Stretching Strap", "Gym Shaker Bottle",
+      "Training Cones", "Yoga Block Set",
+      "Sports Backpack"
+    ]
   },
   {
-    name: "Books & Stationery", icon: "▤", color: "#e8ce8c",
+    name: "Books & Stationery",
+    icon: "▤",
+    color: "#e8ce8c",
     image: "photo-1455390582262-044cdead277a",
-    names: ["Premium Notebook", "Daily Planner", "Gel Pen Set", "Hardcover Journal", "Desk Calendar", "Study Essentials Kit", "Sticky Notes Set", "Sketchbook", "Fine Liner Pens", "Document Organizer", "Bookmark Collection", "Writing Pad", "Color Pencil Set", "Weekly Planner", "Book Storage Stand"]
+    names: [
+      "Premium Notebook", "Daily Planner",
+      "Gel Pen Set", "Hardcover Journal",
+      "Desk Calendar", "Study Essentials Kit",
+      "Sticky Notes Set", "Sketchbook",
+      "Fine Liner Pens", "Document Organizer",
+      "Bookmark Collection", "Writing Pad",
+      "Color Pencil Set", "Weekly Planner",
+      "Book Storage Stand"
+    ]
   },
   {
-    name: "Kitchen & Dining", icon: "♨", color: "#ffb18b",
+    name: "Kitchen & Dining",
+    icon: "♨",
+    color: "#ffb18b",
     image: "photo-1556911220-e15b29be8c8f",
-    names: ["Ceramic Mug Set", "Insulated Travel Mug", "Glass Water Bottle", "Food Storage Set", "Kitchen Utensil Set", "Bamboo Cutting Board", "Reusable Lunch Box", "Measuring Cup Set", "Serving Bowl Set", "Spice Jar Set", "Kitchen Storage Rack", "Coffee Pour-Over Set", "Dish Drying Rack", "Reusable Snack Bags", "Tableware Set"]
+    names: [
+      "Ceramic Mug Set", "Insulated Travel Mug",
+      "Glass Water Bottle", "Food Storage Set",
+      "Kitchen Utensil Set", "Bamboo Cutting Board",
+      "Reusable Lunch Box", "Measuring Cup Set",
+      "Serving Bowl Set", "Spice Jar Set",
+      "Kitchen Storage Rack", "Coffee Pour-Over Set",
+      "Dish Drying Rack", "Reusable Snack Bags",
+      "Tableware Set"
+    ]
   },
   {
-    name: "Office & Workspace", icon: "▦", color: "#a9adff",
+    name: "Office & Workspace",
+    icon: "▦",
+    color: "#a9adff",
     image: "photo-1497366754035-f200968a6e72",
-    names: ["Ergonomic Mouse Pad", "Laptop Riser", "Desk Organizer Set", "LED Desk Light", "Cable Management Kit", "Monitor Stand", "Footrest for Desk", "Office Notebook Set", "Desk Mat", "Laptop Stand", "Pen Holder", "Compact Desk Shelf", "Document Tray", "Wireless Presenter", "Workspace Organizer"]
+    names: [
+      "Ergonomic Mouse Pad", "Laptop Riser",
+      "Desk Organizer Set", "LED Desk Light",
+      "Cable Management Kit", "Monitor Stand",
+      "Footrest for Desk", "Office Notebook Set",
+      "Desk Mat", "Laptop Stand",
+      "Pen Holder", "Compact Desk Shelf",
+      "Document Tray", "Wireless Presenter",
+      "Workspace Organizer"
+    ]
   },
   {
-    name: "Pet Supplies", icon: "♡", color: "#a8df9c",
+    name: "Pet Supplies",
+    icon: "♡",
+    color: "#a8df9c",
     image: "photo-1450778869180-41d0601e046e",
-    names: ["Pet Travel Bowl", "Comfort Pet Bed", "Adjustable Pet Leash", "Pet Grooming Brush", "Interactive Pet Toy", "Pet Feeding Mat", "Travel Pet Carrier", "Pet Storage Container", "Soft Pet Blanket", "Pet Walking Bag", "Pet Water Bottle", "Cozy Pet Cushion", "Pet Toy Bundle", "Pet Care Kit", "Pet Food Scoop"]
+    names: [
+      "Pet Travel Bowl", "Comfort Pet Bed",
+      "Adjustable Pet Leash", "Pet Grooming Brush",
+      "Interactive Pet Toy", "Pet Feeding Mat",
+      "Travel Pet Carrier", "Pet Storage Container",
+      "Soft Pet Blanket", "Pet Walking Bag",
+      "Pet Water Bottle", "Cozy Pet Cushion",
+      "Pet Toy Bundle", "Pet Care Kit",
+      "Pet Food Scoop"
+    ]
   },
   {
-    name: "Toys & Games", icon: "☆", color: "#e6a6ee",
+    name: "Toys & Games",
+    icon: "☆",
+    color: "#e6a6ee",
     image: "photo-1558060370-d644479cb6f7",
-    names: ["Building Block Set", "Strategy Board Game", "Creative Art Kit", "Puzzle Challenge", "Family Card Game", "Remote Control Car", "STEM Discovery Kit", "Wooden Puzzle Set", "Travel Game Pack", "Mini Building Bricks", "Creative Drawing Kit", "Brain Teaser Set", "Tabletop Game", "Learning Activity Set", "Classic Chess Set"]
+    names: [
+      "Building Block Set", "Strategy Board Game",
+      "Creative Art Kit", "Puzzle Challenge",
+      "Family Card Game", "Remote Control Car",
+      "STEM Discovery Kit", "Wooden Puzzle Set",
+      "Travel Game Pack", "Mini Building Bricks",
+      "Creative Drawing Kit", "Brain Teaser Set",
+      "Tabletop Game", "Learning Activity Set",
+      "Classic Chess Set"
+    ]
   },
   {
-    name: "Travel & Luggage", icon: "✈", color: "#8bc8ef",
+    name: "Travel & Luggage",
+    icon: "✈",
+    color: "#8bc8ef",
     image: "photo-1553062407-98eeb64c6a62",
-    names: ["Cabin Travel Backpack", "Packing Cube Set", "Travel Neck Pillow", "Luggage Organizer", "Travel Toiletry Bag", "Compact Travel Pouch", "Passport Holder", "Lightweight Duffel Bag", "Travel Bottle Set", "Luggage Tag Set", "Foldable Travel Tote", "Weekend Travel Bag", "Travel Shoe Bag", "Digital Luggage Scale", "Travel Document Wallet"]
+    names: [
+      "Cabin Travel Backpack", "Packing Cube Set",
+      "Travel Neck Pillow", "Luggage Organizer",
+      "Travel Toiletry Bag", "Compact Travel Pouch",
+      "Passport Holder", "Lightweight Duffel Bag",
+      "Travel Bottle Set", "Luggage Tag Set",
+      "Foldable Travel Tote", "Weekend Travel Bag",
+      "Travel Shoe Bag", "Digital Luggage Scale",
+      "Travel Document Wallet"
+    ]
   },
   {
-    name: "Automotive Accessories", icon: "⚙", color: "#b3b8ca",
+    name: "Automotive Accessories",
+    icon: "⚙",
+    color: "#b3b8ca",
     image: "photo-1492144534655-ae79c964c9d7",
-    names: ["Car Phone Holder", "Car Seat Organizer", "Microfiber Cleaning Kit", "Car Trunk Organizer", "Compact Car Charger", "Dashboard Storage Tray", "Car Sunshade", "Travel Car Bin", "Car Cleaning Brush", "Seat Belt Cushion", "Car Interior Light", "Car Document Holder", "Compact Tire Gauge", "Car Cable Organizer", "Vehicle Storage Hooks"]
+    names: [
+      "Car Phone Holder", "Car Seat Organizer",
+      "Microfiber Cleaning Kit", "Car Trunk Organizer",
+      "Compact Car Charger", "Dashboard Storage Tray",
+      "Car Sunshade", "Travel Car Bin",
+      "Car Cleaning Brush", "Seat Belt Cushion",
+      "Car Interior Light", "Car Document Holder",
+      "Compact Tire Gauge", "Car Cable Organizer",
+      "Vehicle Storage Hooks"
+    ]
   },
   {
-    name: "Watches & Jewelry", icon: "◉", color: "#e7ce86",
+    name: "Watches & Jewelry",
+    icon: "◉",
+    color: "#e7ce86",
     image: "photo-1524592094714-0f0654e20314",
-    names: ["Minimal Wrist Watch", "Classic Analog Watch", "Everyday Bracelet", "Pendant Necklace", "Minimal Ring Set", "Stud Earring Set", "Watch Storage Case", "Layered Necklace", "Classic Cuff Bracelet", "Jewelry Organizer", "Everyday Pendant", "Simple Chain Bracelet", "Travel Jewelry Case", "Minimalist Watch", "Gift Jewelry Box"]
+    names: [
+      "Minimal Wrist Watch", "Classic Analog Watch",
+      "Everyday Bracelet", "Pendant Necklace",
+      "Minimal Ring Set", "Stud Earring Set",
+      "Watch Storage Case", "Layered Necklace",
+      "Classic Cuff Bracelet", "Jewelry Organizer",
+      "Everyday Pendant", "Simple Chain Bracelet",
+      "Travel Jewelry Case", "Minimalist Watch",
+      "Gift Jewelry Box"
+    ]
   }
 ];
 
-// Product photos are chosen by category.
-// Unsplash image URLs require an internet connection.
+// Category-level fallback images.
 const photoByCategory = [
   "photo-1505740420928-5e560c06d30b",
   "photo-1521572163474-6864f9cf17ab",
@@ -153,16 +315,28 @@ const photoByCategory = [
   "photo-1492144534655-ae79c964c9d7",
   "photo-1524592094714-0f0654e20314"
 ];
-// Individual product images
+
+// Individual product images.
+// Keep these names and filenames exactly the same as your actual files.
 const photoByProduct = {
   "Wireless Headphones": "./images/products/wireless-headphones.jpg",
   "Smart Watch": "./images/products/smart-watch.jpg",
   "Bluetooth Speaker": "./images/products/bluetooth-speaker.jpg",
   "Mechanical Keyboard": "./images/products/mechanical-keyboard.jpg",
-  "wireless mouse": "./images/products/wireless-mouse.jpg"
+  "Wireless Mouse": "./images/products/wireless-mouse.jpg",
+  "Portable Charger": "./images/products/portable charger.jpg",
+  "USB-C Hub": "./images/products/USB-c hub.webp",
+  "Webcam HD": "./images/products/webcam hd.jpg",
+  "Gaming Controller": "./images/products/game controller.jpg",
+  "Desk Lamp": "./images/products/desk lamp.jpg",
+  "Tablet Stand": "./images/products/tablet stand.jpg",
+  "Laptop Sleeve": "./images/products/laptop sleeve.jpg",
+  "Earbuds Pro": "./images/products/earbuds pro.jpg",
+  "Power Bank": "./images/products/power bank.jpg",
+  "Monitor Light": "./images/products/monitor light.jpg"
 };
- const products= categories.flatMap((category, categoryIndex) =>
-  // Individual product images
+
+const products = categories.flatMap((category, categoryIndex) =>
   category.names.map((name, itemIndex) => {
     const id = categoryIndex * 15 + itemIndex + 1;
     const price = 299 + ((id * 137 + categoryIndex * 89) % 4700);
@@ -179,7 +353,7 @@ const photoByProduct = {
       rating: Number((4.0 + ((id * 7) % 10) / 10).toFixed(1)),
       reviews: 12 + ((id * 19) % 430),
       image: photoByProduct[name] ||
-       imageURL(photoByCategory[categoryIndex] || category.image),
+        imageURL(photoByCategory[categoryIndex] || category.image),
       description:
         `${name} from our ${category.name} collection. ` +
         "A thoughtfully selected everyday essential, designed for style, convenience and everyday use.",
@@ -187,11 +361,17 @@ const photoByProduct = {
     };
   })
 );
-console.log("Wireless Headphones image:",
-  photoByProduct["Wireless Headphones"]);
 
-console.log("Generated product:",
-  products.find(p => p.name === "Wireless Headphones"));
+// Debug check for the first mapped product.
+console.log(
+  "Wireless Headphones image:",
+  photoByProduct["Wireless Headphones"]
+);
+
+console.log(
+  "Generated product:",
+  products.find(product => product.name === "Wireless Headphones")
+);
 
 let cart = readStore(STORAGE.cart, []);
 let wishlist = readStore(STORAGE.wishlist, []);
@@ -209,10 +389,15 @@ let currentOverlay = null;
 function showToast(message) {
   const toast = $("#toast");
   if (!toast) return;
+
   toast.textContent = message;
   toast.classList.add("show");
+
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
+
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2500);
 }
 
 function getProduct(id) {
@@ -220,9 +405,25 @@ function getProduct(id) {
 }
 
 function productImage(product, width = 650) {
-  return escapeHTML(product.image.replace("w=650", `w=${width}`));
+  const source = product.image.startsWith("https://images.unsplash.com/")
+    ? product.image.replace("w=650", `w=${width}`)
+    : product.image;
+
+  return escapeHTML(source);
 }
 
+// Fallback for broken images in product cards, cart, wishlist and quick view.
+document.addEventListener("error", event => {
+  const img = event.target;
+
+  if (
+    img instanceof HTMLImageElement &&
+    !img.dataset.fallbackApplied
+  ) {
+    img.dataset.fallbackApplied = "true";
+    img.src = "https://placehold.co/650x650/19192c/c9bbff?text=ShopEase";
+  }
+}, true);
 function saveCart() {
   writeStore(STORAGE.cart, cart);
   updateCounts();
@@ -234,7 +435,11 @@ function saveWishlist() {
 }
 
 function updateCounts() {
-  $("#cartCount").textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+  $("#cartCount").textContent = cart.reduce(
+    (sum, item) => sum + item.qty,
+    0
+  );
+
   $("#wishlistCount").textContent = wishlist.length;
 }
 
@@ -245,9 +450,12 @@ function isWished(id) {
 /* ---------------- Categories and filters ---------------- */
 
 function renderCategories() {
-  $("#categoryGrid").innerHTML = categories.map((category, index) => `
-    <button class="category-card" data-category="${escapeHTML(category.name)}"
-      style="--glow:${category.color}">
+  $("#categoryGrid").innerHTML = categories.map(category => `
+    <button
+      class="category-card"
+      data-category="${escapeHTML(category.name)}"
+      style="--glow:${category.color}"
+    >
       <span class="category-icon">${category.icon}</span>
       <strong>${escapeHTML(category.name)}</strong>
       <small>15 products ↗</small>
@@ -256,11 +464,18 @@ function renderCategories() {
 }
 
 function renderFilters() {
-  const names = ["All Products", ...categories.map(category => category.name)];
+  const names = [
+    "All Products",
+    ...categories.map(category => category.name)
+  ];
 
   $("#filterRow").innerHTML = names.map(name => `
-    <button class="filter-chip ${name === activeCategory ? "active" : ""}"
-      data-filter="${escapeHTML(name)}">${escapeHTML(name)}</button>
+    <button
+      class="filter-chip ${name === activeCategory ? "active" : ""}"
+      data-filter="${escapeHTML(name)}"
+    >
+      ${escapeHTML(name)}
+    </button>
   `).join("");
 }
 
@@ -269,9 +484,11 @@ function getFilteredProducts() {
 
   let result = products.filter(product => {
     const categoryMatch =
-      activeCategory === "All Products" || product.category === activeCategory;
+      activeCategory === "All Products" ||
+      product.category === activeCategory;
 
-    const wishlistMatch = !wishlistOnly || isWished(product.id);
+    const wishlistMatch =
+      !wishlistOnly || isWished(product.id);
 
     const queryMatch =
       !query ||
@@ -286,15 +503,19 @@ function getFilteredProducts() {
     case "price-low":
       result.sort((a, b) => a.price - b.price);
       break;
+
     case "price-high":
       result.sort((a, b) => b.price - a.price);
       break;
+
     case "rating":
       result.sort((a, b) => b.rating - a.rating);
       break;
+
     case "name":
       result.sort((a, b) => a.name.localeCompare(b.name));
       break;
+
     default:
       result.sort((a, b) => a.id - b.id);
   }
@@ -309,8 +530,15 @@ function renderProducts() {
   $("#resultCount").textContent =
     `${filtered.length} product${filtered.length === 1 ? "" : "s"}`;
 
-  $("#emptyState").classList.toggle("hidden", filtered.length !== 0);
-  $("#productGrid").classList.toggle("hidden", filtered.length === 0);
+  $("#emptyState").classList.toggle(
+    "hidden",
+    filtered.length !== 0
+  );
+
+  $("#productGrid").classList.toggle(
+    "hidden",
+    filtered.length === 0
+  );
 
   $("#loadMoreBtn").classList.toggle(
     "hidden",
@@ -320,41 +548,73 @@ function renderProducts() {
   $("#productGrid").innerHTML = visible.map(product => `
     <article class="product-card">
       <div class="product-image-wrap" data-view="${product.id}">
-        <img src="${productImage(product)}"
+
+        <img
+          src="${productImage(product)}"
           alt="${escapeHTML(product.name)}"
           loading="lazy"
-          data-product-image="${product.id}">
-        ${product.badge ? `<span class="product-badge">${escapeHTML(product.badge)}</span>` : ""}
-        <button class="wish-toggle ${isWished(product.id) ? "active" : ""}"
-          data-wish="${product.id}" aria-label="Toggle wishlist">
+          data-product-image="${product.id}"
+        >
+
+        ${
+          product.badge
+            ? `<span class="product-badge">${escapeHTML(product.badge)}</span>`
+            : ""
+        }
+
+        <button
+          class="wish-toggle ${isWished(product.id) ? "active" : ""}"
+          data-wish="${product.id}"
+          aria-label="Toggle wishlist"
+        >
           ${isWished(product.id) ? "♥" : "♡"}
         </button>
-        <button class="quick-view" data-view="${product.id}">Quick view ↗</button>
+
+        <button class="quick-view" data-view="${product.id}">
+          Quick view ↗
+        </button>
       </div>
+
       <div class="product-info">
-        <span class="product-category">${escapeHTML(product.category)}</span>
-        <h3 class="product-name" data-view="${product.id}">${escapeHTML(product.name)}</h3>
-        <div class="product-rating">★ ${product.rating} <span>(${product.reviews} reviews)</span></div>
+        <span class="product-category">
+          ${escapeHTML(product.category)}
+        </span>
+
+        <h3 class="product-name" data-view="${product.id}">
+          ${escapeHTML(product.name)}
+        </h3>
+
+        <div class="product-rating">
+          ★ ${product.rating}
+          <span>(${product.reviews} reviews)</span>
+        </div>
+
         <div class="product-bottom">
           <div>
-            <span class="product-price">${money(product.price)}</span>
-            <span class="product-old-price">${money(product.oldPrice)}</span>
+            <span class="product-price">
+              ${money(product.price)}
+            </span>
+
+            <span class="product-old-price">
+              ${money(product.oldPrice)}
+            </span>
           </div>
-          <button class="add-btn" data-add="${product.id}">+ Add</button>
+
+          <button class="add-btn" data-add="${product.id}">
+            + Add
+          </button>
         </div>
       </div>
     </article>
   `).join("");
 
-  $("#productGrid").querySelectorAll("img[data-product-image]").forEach(img => {
-    img.addEventListener("error", () => {
-      img.src = "https://placehold.co/650x650/19192c/c9bbff?text=ShopEase";
-    }, { once: true });
-  });
-
   renderFilters();
+
   $$(".category-card").forEach(button => {
-    button.classList.toggle("active", button.dataset.category === activeCategory);
+    button.classList.toggle(
+      "active",
+      button.dataset.category === activeCategory
+    );
   });
 }
 
@@ -369,8 +629,10 @@ function resetFilters() {
   activeCategory = "All Products";
   wishlistOnly = false;
   visibleLimit = 16;
+
   $("#searchInput").value = "";
   $("#sortSelect").value = "featured";
+
   renderProducts();
 }
 
@@ -380,24 +642,38 @@ function addToCart(id) {
   const product = getProduct(id);
   if (!product) return;
 
-  const existing = cart.find(item => item.id === product.id);
+  const existing = cart.find(
+    item => item.id === product.id
+  );
 
-  if (existing) existing.qty = Math.min(existing.qty + 1, 99);
-  else cart.push({ id: product.id, qty: 1 });
+  if (existing) {
+    existing.qty = Math.min(existing.qty + 1, 99);
+  } else {
+    cart.push({
+      id: product.id,
+      qty: 1
+    });
+  }
 
   saveCart();
   renderCart();
+
   showToast(`${product.name} added to your cart.`);
 }
 
 function changeQty(id, amount) {
-  const item = cart.find(entry => entry.id === Number(id));
+  const item = cart.find(
+    entry => entry.id === Number(id)
+  );
+
   if (!item) return;
 
   item.qty += amount;
 
   if (item.qty <= 0) {
-    cart = cart.filter(entry => entry.id !== Number(id));
+    cart = cart.filter(
+      entry => entry.id !== Number(id)
+    );
   } else {
     item.qty = Math.min(item.qty, 99);
   }
@@ -409,12 +685,18 @@ function changeQty(id, amount) {
 function cartSubtotal() {
   return cart.reduce((sum, item) => {
     const product = getProduct(item.id);
-    return sum + (product ? product.price * item.qty : 0);
+
+    return sum + (
+      product ? product.price * item.qty : 0
+    );
   }, 0);
 }
 
 function renderCart() {
-  cart = cart.filter(item => getProduct(item.id) && item.qty > 0);
+  cart = cart.filter(
+    item => getProduct(item.id) && item.qty > 0
+  );
+
   saveCart();
 
   const container = $("#cartItems");
@@ -423,52 +705,105 @@ function renderCart() {
   if (!cart.length) {
     container.innerHTML = `
       <div class="drawer-empty">
-        <span>🛍</span><h3>Your cart is waiting.</h3>
+        <span>🛍</span>
+        <h3>Your cart is waiting.</h3>
         <p>Discover something you'll love.</p>
-        <button class="primary-btn" data-shop-now>Explore products</button>
-      </div>`;
+        <button class="primary-btn" data-shop-now>
+          Explore products
+        </button>
+      </div>
+    `;
+
     footer.innerHTML = "";
     return;
   }
 
   container.innerHTML = cart.map(item => {
     const product = getProduct(item.id);
+
     return `
       <div class="cart-line">
-        <img src="${productImage(product, 180)}" alt="${escapeHTML(product.name)}">
+        <img
+          src="${productImage(product, 180)}"
+          alt="${escapeHTML(product.name)}"
+        >
+
         <div>
           <h4>${escapeHTML(product.name)}</h4>
           <p>${money(product.price)}</p>
+
           <div class="line-controls">
-            <button data-qty="-1" data-id="${product.id}" aria-label="Decrease quantity">−</button>
+            <button
+              data-qty="-1"
+              data-id="${product.id}"
+              aria-label="Decrease quantity"
+            >
+              −
+            </button>
+
             <span>${item.qty}</span>
-            <button data-qty="1" data-id="${product.id}" aria-label="Increase quantity">+</button>
+
+            <button
+              data-qty="1"
+              data-id="${product.id}"
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
           </div>
         </div>
-        <button class="remove-btn" data-remove="${product.id}">Remove</button>
-      </div>`;
+
+        <button class="remove-btn" data-remove="${product.id}">
+          Remove
+        </button>
+      </div>
+    `;
   }).join("");
 
   const subtotal = cartSubtotal();
   const shipping = subtotal >= 1999 ? 0 : 99;
 
   footer.innerHTML = `
-    <div class="summary-row"><span>Subtotal</span><strong>${money(subtotal)}</strong></div>
-    <div class="summary-row"><span>Shipping estimate</span><strong>${shipping === 0 ? "FREE" : money(shipping)}</strong></div>
-    <div class="summary-row total"><span>Total</span><strong>${money(subtotal + shipping)}</strong></div>
-    <p class="fine-print">Demo checkout only. No real payment will be processed.</p>
-    <button class="primary-btn full-btn" data-checkout>Continue to checkout ↗</button>`;
+    <div class="summary-row">
+      <span>Subtotal</span>
+      <strong>${money(subtotal)}</strong>
+    </div>
+
+    <div class="summary-row">
+      <span>Shipping estimate</span>
+      <strong>
+        ${shipping === 0 ? "FREE" : money(shipping)}
+      </strong>
+    </div>
+
+    <div class="summary-row total">
+      <span>Total</span>
+      <strong>${money(subtotal + shipping)}</strong>
+    </div>
+
+    <p class="fine-print">
+      Demo checkout only. No real payment will be processed.
+    </p>
+
+    <button class="primary-btn full-btn" data-checkout>
+      Continue to checkout ↗
+    </button>
+  `;
 }
 
 /* ---------------- Wishlist ---------------- */
 
 function toggleWishlist(id) {
   id = Number(id);
+
   const product = getProduct(id);
   if (!product) return;
 
   if (isWished(id)) {
-    wishlist = wishlist.filter(savedId => savedId !== id);
+    wishlist = wishlist.filter(
+      savedId => savedId !== id
+    );
+
     showToast("Removed from your wishlist.");
   } else {
     wishlist.push(id);
@@ -486,45 +821,68 @@ function renderWishlist() {
   if (!wishlist.length) {
     container.innerHTML = `
       <div class="drawer-empty">
-        <span>♡</span><h3>Nothing saved just yet.</h3>
+        <span>♡</span>
+        <h3>Nothing saved just yet.</h3>
         <p>Tap the heart on any product to save it here.</p>
-        <button class="primary-btn" data-shop-now>Discover products</button>
-      </div>`;
+        <button class="primary-btn" data-shop-now>
+          Discover products
+        </button>
+      </div>
+    `;
+
     return;
   }
 
   container.innerHTML = wishlist.map(id => {
     const product = getProduct(id);
+
     if (!product) return "";
 
     return `
       <div class="wishlist-line">
-        <img src="${productImage(product, 180)}" alt="${escapeHTML(product.name)}">
+        <img
+          src="${productImage(product, 180)}"
+          alt="${escapeHTML(product.name)}"
+        >
+
         <div>
           <h4>${escapeHTML(product.name)}</h4>
           <p>${money(product.price)}</p>
+
           <div class="line-controls">
-            <button data-add="${product.id}">+ Add to cart</button>
+            <button data-add="${product.id}">
+              + Add to cart
+            </button>
           </div>
         </div>
-        <button class="remove-btn" data-wish="${product.id}">Remove</button>
-      </div>`;
+
+        <button class="remove-btn" data-wish="${product.id}">
+          Remove
+        </button>
+      </div>
+    `;
   }).join("");
 }
-
 /* ---------------- Drawer and modal handling ---------------- */
 
 function openPanel(element) {
   closePanels();
+
   currentOverlay = element;
+
   $("#overlay").classList.remove("hidden");
   element.classList.remove("hidden");
+
   document.body.classList.add("locked");
 }
 
 function closePanels() {
   $("#overlay").classList.add("hidden");
-  $$(".drawer, .modal").forEach(element => element.classList.add("hidden"));
+
+  $$(".drawer, .modal").forEach(element => {
+    element.classList.add("hidden");
+  });
+
   document.body.classList.remove("locked");
   currentOverlay = null;
 }
@@ -539,34 +897,64 @@ function openWishlist() {
   openPanel($("#wishlistDrawer"));
 }
 
+/* ---------------- Product quick view ---------------- */
+
 function openProduct(id) {
   const product = getProduct(id);
   if (!product) return;
 
   $("#productDetails").innerHTML = `
     <div class="product-detail-layout">
-      <img class="product-detail-image" src="${productImage(product, 900)}" alt="${escapeHTML(product.name)}">
+      <img
+        class="product-detail-image"
+        src="${productImage(product, 900)}"
+        alt="${escapeHTML(product.name)}"
+      >
+
       <div>
-        <span class="eyebrow">${escapeHTML(product.category.toUpperCase())}</span>
+        <span class="eyebrow">
+          ${escapeHTML(product.category.toUpperCase())}
+        </span>
+
         <h2>${escapeHTML(product.name)}</h2>
-        <div class="product-rating">★ ${product.rating} <span>(${product.reviews} reviews)</span></div>
-        <div class="detail-price">${money(product.price)} <span class="product-old-price">${money(product.oldPrice)}</span></div>
+
+        <div class="product-rating">
+          ★ ${product.rating}
+          <span>(${product.reviews} reviews)</span>
+        </div>
+
+        <div class="detail-price">
+          ${money(product.price)}
+          <span class="product-old-price">
+            ${money(product.oldPrice)}
+          </span>
+        </div>
+
         <p>${escapeHTML(product.description)}</p>
-        <p>✓ Carefully selected everyday essential<br>✓ Easy to add to your shopping bag<br>✓ Demo storefront item</p>
+
+        <p>
+          ✓ Carefully selected everyday essential<br>
+          ✓ Easy to add to your shopping bag<br>
+          ✓ Demo storefront item
+        </p>
+
         <div class="detail-actions">
-          <button class="primary-btn" data-add="${product.id}">Add to cart</button>
-          <button class="secondary-btn" data-wish="${product.id}">${isWished(product.id) ? "♥ Saved" : "♡ Wishlist"}</button>
+          <button class="primary-btn" data-add="${product.id}">
+            Add to cart
+          </button>
+
+          <button class="secondary-btn" data-wish="${product.id}">
+            ${isWished(product.id) ? "♥ Saved" : "♡ Wishlist"}
+          </button>
         </div>
       </div>
-    </div>`;
-
-  const detailImg = $("#productDetails img");
-  detailImg.addEventListener("error", () => {
-    detailImg.src = "https://placehold.co/650x650/19192c/c9bbff?text=ShopEase";
-  }, { once: true });
+    </div>
+  `;
 
   openPanel($("#productModal"));
 }
+
+/* ---------------- Checkout ---------------- */
 
 function openCheckout() {
   if (!cart.length) {
@@ -578,9 +966,23 @@ function openCheckout() {
   const shipping = subtotal >= 1999 ? 0 : 99;
 
   $("#checkoutSummary").innerHTML = `
-    <div class="summary-row"><span>${cart.reduce((n, i) => n + i.qty, 0)} item(s)</span><strong>${money(subtotal)}</strong></div>
-    <div class="summary-row"><span>Shipping</span><strong>${shipping ? money(shipping) : "FREE"}</strong></div>
-    <div class="summary-row total"><span>Order total</span><strong>${money(subtotal + shipping)}</strong></div>`;
+    <div class="summary-row">
+      <span>
+        ${cart.reduce((n, item) => n + item.qty, 0)} item(s)
+      </span>
+      <strong>${money(subtotal)}</strong>
+    </div>
+
+    <div class="summary-row">
+      <span>Shipping</span>
+      <strong>${shipping ? money(shipping) : "FREE"}</strong>
+    </div>
+
+    <div class="summary-row total">
+      <span>Order total</span>
+      <strong>${money(subtotal + shipping)}</strong>
+    </div>
+  `;
 
   if (session) {
     $("#shippingName").value = session.name || "";
@@ -590,29 +992,44 @@ function openCheckout() {
   openPanel($("#checkoutModal"));
 }
 
+/* ---------------- Orders ---------------- */
+
 function renderOrders() {
   const list = $("#ordersList");
 
   if (!orders.length) {
     list.innerHTML = `
       <div class="drawer-empty">
-        <span>▤</span><h3>No orders yet.</h3>
+        <span>▤</span>
+        <h3>No orders yet.</h3>
         <p>Your demo orders will appear here after checkout.</p>
-      </div>`;
+      </div>
+    `;
+
     return;
   }
 
   list.innerHTML = [...orders].reverse().map(order => `
     <article class="order-card">
       <h3>Order ${escapeHTML(order.id)}</h3>
-      <p>${escapeHTML(order.date)} · ${escapeHTML(order.status)}</p>
+
+      <p>
+        ${escapeHTML(order.date)}
+        ·
+        ${escapeHTML(order.status)}
+      </p>
+
       <div class="order-products">
         ${order.items.map(item => `
-          <span>${escapeHTML(item.name)} × ${item.qty}</span>
+          <span>
+            ${escapeHTML(item.name)} × ${item.qty}
+          </span>
         `).join("")}
       </div>
+
       <div class="summary-row total">
-        <span>Total</span><strong>${money(order.total)}</strong>
+        <span>Total</span>
+        <strong>${money(order.total)}</strong>
       </div>
     </article>
   `).join("");
@@ -625,17 +1042,20 @@ function openOrders() {
 
 /* ---------------- Local demo accounts ---------------- */
 
-// This is intentionally a basic frontend-only demonstration.
+// This is a basic frontend-only demonstration.
 // It is NOT secure authentication and must not be used for real users.
 
 function openAccount() {
   if (session) {
-    $("#accountMessage").textContent = `Signed in as ${session.name} (${session.email}).`;
+    $("#accountMessage").textContent =
+      `Signed in as ${session.name} (${session.email}).`;
+
     $("#loginOpenBtn").textContent = "Account details";
     $("#logoutBtn").classList.remove("hidden");
   } else {
     $("#accountMessage").textContent =
       "Sign in or create a local demo account to personalize your shopping experience.";
+
     $("#loginOpenBtn").textContent = "Sign in / Register";
     $("#logoutBtn").classList.add("hidden");
   }
@@ -644,22 +1064,37 @@ function openAccount() {
   $("#authName").value = "";
   $("#authEmail").value = "";
   $("#authPassword").value = "";
+
   setAuthMode("login");
   openPanel($("#accountModal"));
 }
 
 function setAuthMode(mode) {
   authMode = mode;
+
   const registering = mode === "register";
 
-  $("#accountModalTitle").textContent = registering ? "Create your account." : "Welcome back.";
-  $("#nameField").classList.toggle("hidden", !registering);
+  $("#accountModalTitle").textContent =
+    registering ? "Create your account." : "Welcome back.";
+
+  $("#nameField").classList.toggle(
+    "hidden",
+    !registering
+  );
+
   $("#authName").required = registering;
-  $("#authPassword").autocomplete = registering ? "new-password" : "current-password";
-  $("#authSubmit").textContent = registering ? "Create demo account" : "Sign in";
+
+  $("#authPassword").autocomplete =
+    registering ? "new-password" : "current-password";
+
+  $("#authSubmit").textContent =
+    registering ? "Create demo account" : "Sign in";
 
   $$(".auth-tab").forEach(button => {
-    button.classList.toggle("active", button.dataset.auth === mode);
+    button.classList.toggle(
+      "active",
+      button.dataset.auth === mode
+    );
   });
 }
 
@@ -672,39 +1107,60 @@ $("#accountForm").addEventListener("submit", event => {
   const error = $("#authError");
 
   if (password.length < 6) {
-    error.textContent = "Use at least 6 characters for this demo password.";
+    error.textContent =
+      "Use at least 6 characters for this demo password.";
     return;
   }
 
   if (authMode === "register") {
     if (users.some(user => user.email === email)) {
-      error.textContent = "An account with this email already exists in this browser.";
+      error.textContent =
+        "An account with this email already exists in this browser.";
       return;
     }
 
-    users.push({ name, email, password });
+    users.push({
+      name,
+      email,
+      password
+    });
+
     if (!writeStore(STORAGE.users, users)) {
-      users = users.filter(user => user.email !== email);
+      users = users.filter(
+        user => user.email !== email
+      );
+
       return;
     }
   }
 
-  const user = users.find(entry => entry.email === email && entry.password === password);
+  const user = users.find(
+    entry =>
+      entry.email === email &&
+      entry.password === password
+  );
 
   if (!user) {
     error.textContent = authMode === "register"
       ? "Account could not be created. Check browser storage."
       : "Email or password is incorrect. Create an account first if needed.";
+
     return;
   }
 
-  session = { name: user.name, email: user.email };
+  session = {
+    name: user.name,
+    email: user.email
+  };
+
   if (!writeStore(STORAGE.session, session)) {
     session = null;
     return;
   }
 
-  $("#accountMessage").textContent = `Signed in as ${session.name} (${session.email}).`;
+  $("#accountMessage").textContent =
+    `Signed in as ${session.name} (${session.email}).`;
+
   $("#loginOpenBtn").textContent = "Account details";
   $("#logoutBtn").classList.remove("hidden");
 
@@ -714,9 +1170,12 @@ $("#accountForm").addEventListener("submit", event => {
 
 $("#logoutBtn").addEventListener("click", () => {
   session = null;
+
   localStorage.removeItem(STORAGE.session);
+
   closePanels();
   openAccount();
+
   showToast("You have signed out.");
 });
 
@@ -733,6 +1192,7 @@ $("#checkoutForm").addEventListener("submit", event => {
 
   const subtotal = cartSubtotal();
   const shipping = subtotal >= 1999 ? 0 : 99;
+
   const recipient = $("#shippingName").value.trim();
   const email = $("#shippingEmail").value.trim();
   const address = $("#shippingAddress").value.trim();
@@ -750,8 +1210,10 @@ $("#checkoutForm").addEventListener("submit", event => {
     email,
     address,
     payment: $("#paymentMethod").value,
+
     items: cart.map(item => {
       const product = getProduct(item.id);
+
       return {
         id: item.id,
         name: product.name,
@@ -759,19 +1221,24 @@ $("#checkoutForm").addEventListener("submit", event => {
         qty: item.qty
       };
     }),
+
     total: subtotal + shipping
   };
 
   const updatedOrders = [...orders, order];
 
   // Only clear the cart after the order has been saved.
-  if (!writeStore(STORAGE.orders, updatedOrders)) return;
+  if (!writeStore(STORAGE.orders, updatedOrders)) {
+    return;
+  }
 
   orders = updatedOrders;
   cart = [];
 
   if (!writeStore(STORAGE.cart, cart)) {
-    showToast("Order saved, but cart cleanup failed. Please review your cart.");
+    showToast(
+      "Order saved, but cart cleanup failed. Please review your cart."
+    );
   }
 
   updateCounts();
@@ -779,14 +1246,17 @@ $("#checkoutForm").addEventListener("submit", event => {
   closePanels();
   renderOrders();
   openOrders();
+
   showToast("Demo order placed successfully!");
 });
-
 /* ---------------- Click handling ---------------- */
 
-// Delegated events keep all dynamically generated product buttons working.
+// Delegated events keep dynamically generated product buttons working.
 document.addEventListener("click", event => {
-  const target = event.target.closest("button, [data-view], [data-shop-now]");
+  const target = event.target.closest(
+    "button, [data-view], [data-shop-now]"
+  );
+
   if (!target) return;
 
   if (target.hasAttribute("data-close")) {
@@ -796,13 +1266,21 @@ document.addEventListener("click", event => {
 
   if (target.hasAttribute("data-shop-now")) {
     closePanels();
-    $("#shop").scrollIntoView({ behavior: "smooth" });
+
+    $("#shop").scrollIntoView({
+      behavior: "smooth"
+    });
+
     return;
   }
 
   if (target.hasAttribute("data-category")) {
     setCategory(target.dataset.category);
-    $("#shop").scrollIntoView({ behavior: "smooth" });
+
+    $("#shop").scrollIntoView({
+      behavior: "smooth"
+    });
+
     return;
   }
 
@@ -813,10 +1291,17 @@ document.addEventListener("click", event => {
 
   if (target.hasAttribute("data-add")) {
     const id = Number(target.dataset.add);
+
     addToCart(id);
 
-    if (target.closest("#productDetails")) closePanels();
-    if (target.closest("#wishlistItems")) renderWishlist();
+    if (target.closest("#productDetails")) {
+      closePanels();
+    }
+
+    if (target.closest("#wishlistItems")) {
+      renderWishlist();
+    }
+
     return;
   }
 
@@ -831,14 +1316,22 @@ document.addEventListener("click", event => {
   }
 
   if (target.hasAttribute("data-qty")) {
-    changeQty(Number(target.dataset.id), Number(target.dataset.qty));
+    changeQty(
+      Number(target.dataset.id),
+      Number(target.dataset.qty)
+    );
+
     return;
   }
 
   if (target.hasAttribute("data-remove")) {
-    cart = cart.filter(item => item.id !== Number(target.dataset.remove));
+    cart = cart.filter(
+      item => item.id !== Number(target.dataset.remove)
+    );
+
     saveCart();
     renderCart();
+
     showToast("Product removed from cart.");
     return;
   }
@@ -854,22 +1347,33 @@ document.addEventListener("click", event => {
   }
 });
 
+/* ---------------- Main event listeners ---------------- */
+
 $("#overlay").addEventListener("click", closePanels);
 
 $("#cartBtn").addEventListener("click", openCart);
+
 $("#wishlistBtn").addEventListener("click", openWishlist);
+
 $("#accountBtn").addEventListener("click", openAccount);
+
 $("#loginOpenBtn").addEventListener("click", openAccount);
+
 $("#viewWishlistBtn").addEventListener("click", openWishlist);
+
 $("#viewOrdersBtn").addEventListener("click", openOrders);
+
 $("#footerOrdersLink").addEventListener("click", event => {
   event.preventDefault();
   openOrders();
 });
+
 $("#footerWishlistLink").addEventListener("click", event => {
   event.preventDefault();
   openWishlist();
 });
+
+/* ---------------- Search and sorting ---------------- */
 
 $("#searchInput").addEventListener("input", () => {
   visibleLimit = 16;
@@ -885,11 +1389,19 @@ $("#loadMoreBtn").addEventListener("click", () => {
 
 $("#resetFilters").addEventListener("click", resetFilters);
 
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") closePanels();
+/* ---------------- Keyboard shortcuts ---------------- */
 
-  if (event.key === "/" &&
-      !["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) {
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closePanels();
+  }
+
+  if (
+    event.key === "/" &&
+    !["INPUT", "TEXTAREA", "SELECT"].includes(
+      document.activeElement.tagName
+    )
+  ) {
     event.preventDefault();
     $("#searchInput").focus();
   }
@@ -908,13 +1420,22 @@ function initializeShopEase() {
     : [];
 
   wishlist = Array.isArray(wishlist)
-    ? [...new Set(wishlist.map(Number).filter(id => !!getProduct(id)))]
+    ? [
+        ...new Set(
+          wishlist
+            .map(Number)
+            .filter(id => !!getProduct(id))
+        )
+      ]
     : [];
 
   orders = Array.isArray(orders) ? orders : [];
   users = Array.isArray(users) ? users : [];
 
-  if (session && !users.some(user => user.email === session.email)) {
+  if (
+    session &&
+    !users.some(user => user.email === session.email)
+  ) {
     session = null;
     localStorage.removeItem(STORAGE.session);
   }
@@ -924,14 +1445,154 @@ function initializeShopEase() {
   renderCart();
   renderWishlist();
   updateCounts();
-  openAccount; // Account UI is updated below without opening a modal.
 
+  // Update account labels without opening the account modal.
   if (session) {
     $("#accountMessage").textContent =
       `Signed in as ${session.name} (${session.email}).`;
+
     $("#loginOpenBtn").textContent = "Account details";
     $("#logoutBtn").classList.remove("hidden");
   }
 }
+
+/* ==========================================
+   ShopEase - Horizontal Auto Banner Slider
+========================================== */
+
+(function initializeLandscapeBanners() {
+  const viewport = document.querySelector("#seBannerViewport");
+  const track = document.querySelector("#seBannerTrack");
+  const previous = document.querySelector("#seBannerPrev");
+  const next = document.querySelector("#seBannerNext");
+  const dotsContainer = document.querySelector("#seBannerDots");
+
+  if (!viewport || !track || !previous || !next || !dotsContainer) {
+    return;
+  }
+
+  const cards = [...track.querySelectorAll(".se-promo-card")];
+  const dots = [...dotsContainer.querySelectorAll("button")];
+
+  if (!cards.length) return;
+
+  let currentIndex = 0;
+  let autoplay = null;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  function getStep() {
+    if (cards.length < 2) return cards[0].offsetWidth;
+
+    return cards[1].offsetLeft - cards[0].offsetLeft;
+  }
+
+  function getMaximumIndex() {
+    const step = getStep();
+    if (!step) return 0;
+
+    return Math.max(
+      0,
+      Math.ceil(
+        (viewport.scrollWidth - viewport.clientWidth) / step
+      )
+    );
+  }
+
+  function updateDots() {
+    const maximum = getMaximumIndex();
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle(
+        "active",
+        index === Math.min(currentIndex, maximum)
+      );
+    });
+  }
+
+  function moveTo(index) {
+    const maximum = getMaximumIndex();
+
+    if (index > maximum) {
+      index = 0;
+    }
+
+    if (index < 0) {
+      index = maximum;
+    }
+
+    currentIndex = index;
+
+    viewport.scrollTo({
+      left: currentIndex * getStep(),
+      behavior: reducedMotion ? "auto" : "smooth"
+    });
+
+    updateDots();
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+
+    if (reducedMotion) return;
+
+    autoplay = setInterval(() => {
+      moveTo(currentIndex + 1);
+    }, 3500);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplay);
+  }
+
+  previous.addEventListener("click", () => {
+    moveTo(currentIndex - 1);
+    startAutoplay();
+  });
+
+  next.addEventListener("click", () => {
+    moveTo(currentIndex + 1);
+    startAutoplay();
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      moveTo(index);
+      startAutoplay();
+    });
+  });
+
+  viewport.addEventListener("mouseenter", stopAutoplay);
+  viewport.addEventListener("mouseleave", startAutoplay);
+
+  viewport.addEventListener("scroll", () => {
+    const step = getStep();
+
+    if (step > 0) {
+      currentIndex = Math.round(viewport.scrollLeft / step);
+      updateDots();
+    }
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    currentIndex = 0;
+    viewport.scrollLeft = 0;
+    updateDots();
+  });
+
+  // Pause autoplay when the browser tab is hidden.
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopAutoplay();
+    } else {
+      startAutoplay();
+    }
+  });
+
+  updateDots();
+  startAutoplay();
+})();
 
 initializeShopEase();
