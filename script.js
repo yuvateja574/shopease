@@ -1,7 +1,7 @@
 "use strict";
 
 /* =========================================================
-   ShopEase 2.0 — Frontend demo
+   ShopEase 4.0 — Electronics storefront
    Data is stored in this browser using localStorage.
    No real payment processing or backend is included.
 ========================================================= */
@@ -10,11 +10,11 @@ const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
 const STORAGE = {
-  cart: "shopease2_cart",
-  wishlist: "shopease2_wishlist",
-  users: "shopease2_users",
-  session: "shopease2_session",
-  orders: "shopease2_orders"
+  cart: "shopease4_cart",
+  wishlist: "shopease4_wishlist",
+  users: "shopease4_users",
+  session: "shopease4_session",
+  orders: "shopease4_orders"
 };
 
 function readStore(key, fallback) {
@@ -60,260 +60,114 @@ function imageURL(id, width = 650) {
 
 const categories = [
   {
-    name: "Electronics",
-    icon: "⌘",
-    color: "#8b76ff",
-    image: "photo-1498049794561-7780e7231661",
+    name: "Smartphones",
+    icon: "▣",
+    color: "#9278ff",
+    image: "photo-1511707171634-5f897ff02aa9",
     names: [
-      "Wireless Headphones", "Smart Watch", "Bluetooth Speaker",
-      "Mechanical Keyboard", "Wireless Mouse", "Portable Charger",
-      "USB-C Hub", "Webcam HD", "Gaming Controller", "Desk Lamp",
-      "Tablet Stand", "Laptop Sleeve", "Earbuds Pro", "Power Bank",
-      "Monitor Light"
+      "Apple iPhone 16", "Samsung Galaxy S25", "OnePlus 13", "Google Pixel 9",
+      "Xiaomi 14", "Nothing Phone 3", "Samsung Galaxy A56", "iPhone 16 Pro",
+      "OnePlus Nord 5", "Motorola Edge 60", "Redmi Note 14 Pro", "iPhone 16 Plus",
+      "Samsung Galaxy S25 Ultra", "Vivo V50", "Realme GT 7 Pro"
     ]
   },
   {
-    name: "Fashion & Clothing",
-    icon: "✧",
-    color: "#e89dbd",
-    image: "photo-1445205170230-053b83016050",
+    name: "Laptops",
+    icon: "▱",
+    color: "#58b7ff",
+    image: "photo-1496181133206-80ce9b88a853",
     names: [
-      "Classic Cotton T-Shirt", "Relaxed Fit Hoodie",
-      "Casual Linen Shirt", "Everyday Denim Jacket",
-      "Comfort Joggers", "Oversized Sweatshirt",
-      "Essential Polo Shirt", "Casual Chinos",
-      "Lightweight Jacket", "Cotton Overshirt",
-      "Everyday Shorts", "Knit Sweater",
-      "Classic Track Pants", "Zip-Up Hoodie", "Weekend Shirt"
+      "MacBook Air M4", "MacBook Pro M4", "Dell XPS 14", "HP Pavilion Plus",
+      "Lenovo IdeaPad Slim 5", "ASUS Zenbook 14", "Acer Swift Go 14", "ASUS ROG Zephyrus G16",
+      "HP Victus 15", "Lenovo LOQ Gaming", "Dell Inspiron 14", "Acer Aspire 7",
+      "Microsoft Surface Laptop", "Samsung Galaxy Book5", "MSI Thin 15"
     ]
   },
   {
-    name: "Footwear",
-    icon: "◈",
-    color: "#efad77",
-    image: "photo-1542291026-7eec264c27ff",
+    name: "Tablets",
+    icon: "▯",
+    color: "#7ed8c2",
+    image: "photo-1544244015-0df4b3ffc6b0",
     names: [
-      "Urban Running Shoes", "Classic White Sneakers",
-      "Everyday Slides", "Trail Walking Shoes",
-      "Canvas High-Tops", "Comfort Sandals",
-      "Minimal Leather Shoes", "Training Sneakers",
-      "Casual Slip-Ons", "Streetwear Sneakers",
-      "Lightweight Trainers", "Daily Walking Shoes",
-      "Sport Sandals", "Classic Loafers",
-      "Active Lifestyle Shoes"
+      "Apple iPad Air", "Apple iPad Pro", "Samsung Galaxy Tab S10", "Samsung Galaxy Tab A9+",
+      "OnePlus Pad 2", "Xiaomi Pad 7", "Lenovo Tab P12", "Redmi Pad Pro",
+      "Honor Pad 9", "Apple iPad mini", "Samsung Galaxy Tab S10 FE", "Realme Pad 2",
+      "Lenovo Tab M11", "OnePlus Pad Go", "Nokia T21 Tablet"
+    ]
+  },
+  {
+    name: "Audio & Headphones",
+    icon: "♫",
+    color: "#d39aff",
+    image: "photo-1505740420928-5e560c06d30b",
+    names: [
+      "Sony WH-1000XM5", "Bose QuietComfort Ultra", "Apple AirPods Pro 2", "Samsung Galaxy Buds3 Pro",
+      "JBL Tune 770NC", "Nothing Ear", "Sony WF-1000XM5", "JBL Flip 6 Speaker",
+      "Bose SoundLink Flex", "Sennheiser Momentum 4", "OnePlus Buds Pro 3", "JBL Live 670NC",
+      "Apple AirPods 4", "Marshall Emberton III", "Boat Nirvana 751 ANC"
+    ]
+  },
+  {
+    name: "Smartwatches",
+    icon: "◷",
+    color: "#ffad83",
+    image: "photo-1523275335684-37898b6baf30",
+    names: [
+      "Apple Watch Series 10", "Samsung Galaxy Watch 7", "Google Pixel Watch 3", "OnePlus Watch 2",
+      "Garmin Venu 3", "Amazfit Balance", "Noise ColorFit Pro 5", "Fitbit Versa 4",
+      "Apple Watch Ultra 2", "Samsung Galaxy Watch Ultra", "CMF Watch Pro 2", "Titan Smart Pro",
+      "Fossil Gen 6 Smartwatch", "Huawei Watch GT 5", "boAt Lunar Oasis"
+    ]
+  },
+  {
+    name: "Gaming",
+    icon: "⌁",
+    color: "#ff8eaa",
+    image: "photo-1593305841991-05c297ba4575",
+    names: [
+      "PlayStation 5 Slim", "Xbox Series X", "Nintendo Switch OLED", "Logitech G502 Gaming Mouse",
+      "Razer BlackWidow Keyboard", "HyperX Cloud III Headset", "Xbox Wireless Controller", "DualSense Edge Controller",
+      "Logitech G Pro X Superlight", "Razer Kishi Mobile Controller", "SteelSeries Arctis Nova 7", "Elgato Stream Deck",
+      "Corsair K70 RGB Keyboard", "ASUS TUF Gaming Mouse", "8BitDo Ultimate Controller"
+    ]
+  },
+  {
+    name: "Monitors & Displays",
+    icon: "▭",
+    color: "#78aaff",
+    image: "photo-1527443224154-c4a3942d3acf",
+    names: [
+      "LG UltraGear 27-inch Monitor", "Samsung Odyssey G5", "Dell UltraSharp 27", "ASUS ProArt Display",
+      "Acer Nitro 24-inch Monitor", "BenQ MOBIUZ EX2710", "LG 4K UHD Monitor", "Samsung Smart Monitor M8",
+      "MSI MAG 32-inch Monitor", "Gigabyte M27Q Gaming Monitor", "Lenovo ThinkVision 24", "HP Series 5 Monitor",
+      "ViewSonic VX Gaming Monitor", "AOC 27G4 Monitor", "Portable 15.6-inch Monitor"
     ]
   },
   {
     name: "Accessories",
-    icon: "◇",
-    color: "#b49aff",
-    image: "photo-1523275335684-37898b6baf30",
+    icon: "⌘",
+    color: "#e6c17c",
+    image: "photo-1498049794561-7780e7231661",
     names: [
-      "Minimal Wallet", "Everyday Backpack",
-      "Travel Crossbody Bag", "Classic Belt",
-      "Polarized Sunglasses", "Compact Card Holder",
-      "Canvas Tote Bag", "Everyday Cap",
-      "Laptop Backpack", "Travel Organizer",
-      "Key Organizer", "Minimal Sling Bag",
-      "Leather Card Wallet", "Foldable Umbrella",
-      "Everyday Pouch"
-    ]
-  },
-  {
-    name: "Home & Living",
-    icon: "⌂",
-    color: "#85d5c2",
-    image: "photo-1600210492486-724fe5c67fb0",
-    names: [
-      "Decorative Table Lamp", "Soft Cushion Set",
-      "Minimal Wall Clock", "Ceramic Vase",
-      "Cozy Throw Blanket", "Storage Basket",
-      "Desk Organizer", "Scented Candle",
-      "Decorative Mirror", "Indoor Planter",
-      "Bedside Organizer", "Accent Table Decor",
-      "Cotton Bedsheet Set", "Modern Bookend",
-      "Photo Frame Set"
-    ]
-  },
-  {
-    name: "Beauty & Personal Care",
-    icon: "✿",
-    color: "#f0a7c5",
-    image: "photo-1596462502278-27bfdc403348",
-    names: [
-      "Daily Care Kit", "Hydrating Face Cream",
-      "Gentle Face Cleanser", "Travel Grooming Kit",
-      "Body Care Set", "Soft Makeup Brush Set",
-      "Facial Care Essentials", "Hand Care Cream",
-      "Beauty Organizer", "Compact Travel Mirror",
-      "Hair Styling Brush", "Skin Care Pouch",
-      "Daily Moisturizer", "Personal Care Set",
-      "Beauty Travel Kit"
-    ]
-  },
-  {
-    name: "Sports & Fitness",
-    icon: "↗",
-    color: "#90c6ff",
-    image: "photo-1517836357463-d25dfeac3438",
-    names: [
-      "Training Yoga Mat", "Adjustable Dumbbells",
-      "Resistance Band Set", "Insulated Water Bottle",
-      "Gym Duffel Bag", "Sports Towel Set",
-      "Fitness Jump Rope", "Workout Gloves",
-      "Exercise Ball", "Running Belt",
-      "Stretching Strap", "Gym Shaker Bottle",
-      "Training Cones", "Yoga Block Set",
-      "Sports Backpack"
-    ]
-  },
-  {
-    name: "Books & Stationery",
-    icon: "▤",
-    color: "#e8ce8c",
-    image: "photo-1455390582262-044cdead277a",
-    names: [
-      "Premium Notebook", "Daily Planner",
-      "Gel Pen Set", "Hardcover Journal",
-      "Desk Calendar", "Study Essentials Kit",
-      "Sticky Notes Set", "Sketchbook",
-      "Fine Liner Pens", "Document Organizer",
-      "Bookmark Collection", "Writing Pad",
-      "Color Pencil Set", "Weekly Planner",
-      "Book Storage Stand"
-    ]
-  },
-  {
-    name: "Kitchen & Dining",
-    icon: "♨",
-    color: "#ffb18b",
-    image: "photo-1556911220-e15b29be8c8f",
-    names: [
-      "Ceramic Mug Set", "Insulated Travel Mug",
-      "Glass Water Bottle", "Food Storage Set",
-      "Kitchen Utensil Set", "Bamboo Cutting Board",
-      "Reusable Lunch Box", "Measuring Cup Set",
-      "Serving Bowl Set", "Spice Jar Set",
-      "Kitchen Storage Rack", "Coffee Pour-Over Set",
-      "Dish Drying Rack", "Reusable Snack Bags",
-      "Tableware Set"
-    ]
-  },
-  {
-    name: "Office & Workspace",
-    icon: "▦",
-    color: "#a9adff",
-    image: "photo-1497366754035-f200968a6e72",
-    names: [
-      "Ergonomic Mouse Pad", "Laptop Riser",
-      "Desk Organizer Set", "LED Desk Light",
-      "Cable Management Kit", "Monitor Stand",
-      "Footrest for Desk", "Office Notebook Set",
-      "Desk Mat", "Laptop Stand",
-      "Pen Holder", "Compact Desk Shelf",
-      "Document Tray", "Wireless Presenter",
-      "Workspace Organizer"
-    ]
-  },
-  {
-    name: "Pet Supplies",
-    icon: "♡",
-    color: "#a8df9c",
-    image: "photo-1450778869180-41d0601e046e",
-    names: [
-      "Pet Travel Bowl", "Comfort Pet Bed",
-      "Adjustable Pet Leash", "Pet Grooming Brush",
-      "Interactive Pet Toy", "Pet Feeding Mat",
-      "Travel Pet Carrier", "Pet Storage Container",
-      "Soft Pet Blanket", "Pet Walking Bag",
-      "Pet Water Bottle", "Cozy Pet Cushion",
-      "Pet Toy Bundle", "Pet Care Kit",
-      "Pet Food Scoop"
-    ]
-  },
-  {
-    name: "Toys & Games",
-    icon: "☆",
-    color: "#e6a6ee",
-    image: "photo-1558060370-d644479cb6f7",
-    names: [
-      "Building Block Set", "Strategy Board Game",
-      "Creative Art Kit", "Puzzle Challenge",
-      "Family Card Game", "Remote Control Car",
-      "STEM Discovery Kit", "Wooden Puzzle Set",
-      "Travel Game Pack", "Mini Building Bricks",
-      "Creative Drawing Kit", "Brain Teaser Set",
-      "Tabletop Game", "Learning Activity Set",
-      "Classic Chess Set"
-    ]
-  },
-  {
-    name: "Travel & Luggage",
-    icon: "✈",
-    color: "#8bc8ef",
-    image: "photo-1553062407-98eeb64c6a62",
-    names: [
-      "Cabin Travel Backpack", "Packing Cube Set",
-      "Travel Neck Pillow", "Luggage Organizer",
-      "Travel Toiletry Bag", "Compact Travel Pouch",
-      "Passport Holder", "Lightweight Duffel Bag",
-      "Travel Bottle Set", "Luggage Tag Set",
-      "Foldable Travel Tote", "Weekend Travel Bag",
-      "Travel Shoe Bag", "Digital Luggage Scale",
-      "Travel Document Wallet"
-    ]
-  },
-  {
-    name: "Automotive Accessories",
-    icon: "⚙",
-    color: "#b3b8ca",
-    image: "photo-1492144534655-ae79c964c9d7",
-    names: [
-      "Car Phone Holder", "Car Seat Organizer",
-      "Microfiber Cleaning Kit", "Car Trunk Organizer",
-      "Compact Car Charger", "Dashboard Storage Tray",
-      "Car Sunshade", "Travel Car Bin",
-      "Car Cleaning Brush", "Seat Belt Cushion",
-      "Car Interior Light", "Car Document Holder",
-      "Compact Tire Gauge", "Car Cable Organizer",
-      "Vehicle Storage Hooks"
-    ]
-  },
-  {
-    name: "Watches & Jewelry",
-    icon: "◉",
-    color: "#e7ce86",
-    image: "photo-1524592094714-0f0654e20314",
-    names: [
-      "Minimal Wrist Watch", "Classic Analog Watch",
-      "Everyday Bracelet", "Pendant Necklace",
-      "Minimal Ring Set", "Stud Earring Set",
-      "Watch Storage Case", "Layered Necklace",
-      "Classic Cuff Bracelet", "Jewelry Organizer",
-      "Everyday Pendant", "Simple Chain Bracelet",
-      "Travel Jewelry Case", "Minimalist Watch",
-      "Gift Jewelry Box"
+      "Anker 65W USB-C Charger", "Samsung 25W Fast Charger", "Anker 20K Power Bank", "SanDisk 1TB Portable SSD",
+      "Logitech MX Master 3S Mouse", "Keychron K2 Keyboard", "Anker USB-C Hub", "TP-Link Wi-Fi 6 Router",
+      "Belkin 3-in-1 Charging Stand", "Portronics Laptop Stand", "Logitech Brio 4K Webcam", "Amazon Basics HDMI Cable",
+      "Samsung T7 Shield SSD", "JBL USB-C Cable", "Ugreen 100W USB-C Cable"
     ]
   }
 ];
 
-// Category-level fallback images.
+// Category-level fallback images used when a product has no local image.
+
 const photoByCategory = [
+  "photo-1511707171634-5f897ff02aa9",
+  "photo-1496181133206-80ce9b88a853",
+  "photo-1544244015-0df4b3ffc6b0",
   "photo-1505740420928-5e560c06d30b",
-  "photo-1521572163474-6864f9cf17ab",
-  "photo-1542291026-7eec264c27ff",
   "photo-1523275335684-37898b6baf30",
-  "photo-1600210492486-724fe5c67fb0",
-  "photo-1596462502278-27bfdc403348",
-  "photo-1517836357463-d25dfeac3438",
-  "photo-1455390582262-044cdead277a",
-  "photo-1556911220-e15b29be8c8f",
-  "photo-1497366754035-f200968a6e72",
-  "photo-1450778869180-41d0601e046e",
-  "photo-1558060370-d644479cb6f7",
-  "photo-1553062407-98eeb64c6a62",
-  "photo-1492144534655-ae79c964c9d7",
-  "photo-1524592094714-0f0654e20314"
+  "photo-1593305841991-05c297ba4575",
+  "photo-1527443224154-c4a3942d3acf",
+  "photo-1498049794561-7780e7231661"
 ];
 
 // Individual product images.
@@ -339,7 +193,12 @@ const photoByProduct = {
 const products = categories.flatMap((category, categoryIndex) =>
   category.names.map((name, itemIndex) => {
     const id = categoryIndex * 15 + itemIndex + 1;
-    const price = 299 + ((id * 137 + categoryIndex * 89) % 4700);
+    const priceRanges = [
+      [6999, 59999], [24999, 149999], [8999, 89999], [799, 34999],
+      [1499, 49999], [999, 89999], [5999, 79999], [299, 24999]
+    ];
+    const [minPrice, maxPrice] = priceRanges[categoryIndex];
+    const price = minPrice + ((id * 137 + categoryIndex * 89) % (maxPrice - minPrice + 1));
     const discount = [10, 15, 20, 25][id % 4];
 
     return {
@@ -356,7 +215,7 @@ const products = categories.flatMap((category, categoryIndex) =>
         imageURL(photoByCategory[categoryIndex] || category.image),
       description:
         `${name} from our ${category.name} collection. ` +
-        "A thoughtfully selected everyday essential, designed for style, convenience and everyday use.",
+        "Explore key specifications, compare your options and find the right technology for your everyday needs.",
       badge: id % 7 === 0 ? "POPULAR" : id % 5 === 0 ? "GREAT FIND" : ""
     };
   })
@@ -424,7 +283,6 @@ document.addEventListener("error", event => {
     img.src = "https://placehold.co/650x650/19192c/c9bbff?text=ShopEase";
   }
 }, true);
-
 function saveCart() {
   writeStore(STORAGE.cart, cart);
   updateCounts();
@@ -791,6 +649,7 @@ function renderCart() {
     </button>
   `;
 }
+
 /* ---------------- Wishlist ---------------- */
 
 function toggleWishlist(id) {
@@ -863,7 +722,6 @@ function renderWishlist() {
     `;
   }).join("");
 }
-
 /* ---------------- Drawer and modal handling ---------------- */
 
 function openPanel(element) {
@@ -1457,14 +1315,8 @@ function initializeShopEase() {
   }
 }
 
-
 /* ==========================================
-   ShopEase - Continuous Auto Banner Slider
-========================================== */
-
-
-/* ==========================================
-   ShopEase - Automatic Promotional Carousel
+   ShopEase - Horizontal Auto Banner Slider
 ========================================== */
 
 (function initializeLandscapeBanners() {
@@ -1478,117 +1330,75 @@ function initializeShopEase() {
     return;
   }
 
-  let cards = [...track.querySelectorAll(".se-promo-card")];
+  const cards = [...track.querySelectorAll(".se-promo-card")];
+  const dots = [...dotsContainer.querySelectorAll("button")];
 
-  if (cards.length < 2) return;
+  if (!cards.length) return;
 
   let currentIndex = 0;
   let autoplay = null;
-  let isAnimating = false;
 
   const reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  // Create one navigation dot for every original banner.
-  dotsContainer.innerHTML = cards.map((card, index) => `
-    <button
-      type="button"
-      aria-label="Go to banner ${index + 1}"
-      class="${index === 0 ? "active" : ""}"
-    ></button>
-  `).join("");
+  function getStep() {
+    if (cards.length < 2) return cards[0].offsetWidth;
+
+    return cards[1].offsetLeft - cards[0].offsetLeft;
+  }
+
+  function getMaximumIndex() {
+    const step = getStep();
+    if (!step) return 0;
+
+    return Math.max(
+      0,
+      Math.ceil(
+        (viewport.scrollWidth - viewport.clientWidth) / step
+      )
+    );
+  }
 
   function updateDots() {
-    [...dotsContainer.querySelectorAll("button")].forEach((dot, index) => {
-      dot.classList.toggle("active", index === currentIndex);
+    const maximum = getMaximumIndex();
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle(
+        "active",
+        index === Math.min(currentIndex, maximum)
+      );
     });
   }
 
-  function getStep() {
-    const first = track.querySelector(".se-promo-card");
-    if (!first) return 0;
+  function moveTo(index) {
+    const maximum = getMaximumIndex();
 
-    const styles = getComputedStyle(track);
-    const gap = parseFloat(styles.columnGap || styles.gap) || 0;
-
-    return first.getBoundingClientRect().width + gap;
-  }
-
-  function finishMove(direction) {
-    if (direction === "next") {
-      track.appendChild(track.firstElementChild);
-      currentIndex = (currentIndex + 1) % cards.length;
-    } else {
-      track.insertBefore(track.lastElementChild, track.firstElementChild);
-      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+    if (index > maximum) {
+      index = 0;
     }
 
-    track.style.transition = "none";
-    track.style.transform = "translateX(0)";
+    if (index < 0) {
+      index = maximum;
+    }
+
+    currentIndex = index;
+
+    viewport.scrollTo({
+      left: currentIndex * getStep(),
+      behavior: reducedMotion ? "auto" : "smooth"
+    });
+
     updateDots();
-    isAnimating = false;
-  }
-
-  function move(direction) {
-    if (isAnimating) return;
-
-    const step = getStep();
-    if (!step) return;
-
-    isAnimating = true;
-
-    if (direction === "next") {
-      track.style.transition = reducedMotion
-        ? "none"
-        : "transform .65s ease-in-out";
-
-      track.style.transform = `translateX(-${step}px)`;
-
-      if (reducedMotion) {
-        finishMove("next");
-      } else {
-        track.addEventListener("transitionend", function handler() {
-          track.removeEventListener("transitionend", handler);
-          finishMove("next");
-        });
-      }
-    } else {
-      track.style.transition = "none";
-      track.insertBefore(track.lastElementChild, track.firstElementChild);
-      track.style.transform = `translateX(-${step}px)`;
-
-      // Force the browser to apply the starting position.
-      track.offsetHeight;
-
-      track.style.transition = reducedMotion
-        ? "none"
-        : "transform .65s ease-in-out";
-
-      track.style.transform = "translateX(0)";
-
-      if (reducedMotion) {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        updateDots();
-        isAnimating = false;
-      } else {
-        track.addEventListener("transitionend", function handler() {
-          track.removeEventListener("transitionend", handler);
-          currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-          updateDots();
-          isAnimating = false;
-        });
-      }
-    }
   }
 
   function startAutoplay() {
     stopAutoplay();
 
-    if (reducedMotion || document.hidden) return;
+    if (reducedMotion) return;
 
     autoplay = setInterval(() => {
-      move("next");
+      moveTo(currentIndex + 1);
     }, 3500);
   }
 
@@ -1596,44 +1406,42 @@ function initializeShopEase() {
     clearInterval(autoplay);
   }
 
-  next.addEventListener("click", () => {
-    move("next");
-    startAutoplay();
-  });
-
   previous.addEventListener("click", () => {
-    move("previous");
+    moveTo(currentIndex - 1);
     startAutoplay();
   });
 
-  dotsContainer.addEventListener("click", event => {
-    const dot = event.target.closest("button");
-    if (!dot) return;
-
-    const targetIndex = [...dotsContainer.children].indexOf(dot);
-    if (targetIndex < 0) return;
-
-    stopAutoplay();
-
-    let difference =
-      (targetIndex - currentIndex + cards.length) % cards.length;
-
-    if (difference > cards.length / 2) {
-      difference -= cards.length;
-    }
-
-    const direction = difference < 0 ? "previous" : "next";
-
-    for (let i = 0; i < Math.abs(difference); i++) {
-      setTimeout(() => move(direction), i * 750);
-    }
-
+  next.addEventListener("click", () => {
+    moveTo(currentIndex + 1);
     startAutoplay();
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      moveTo(index);
+      startAutoplay();
+    });
   });
 
   viewport.addEventListener("mouseenter", stopAutoplay);
   viewport.addEventListener("mouseleave", startAutoplay);
 
+  viewport.addEventListener("scroll", () => {
+    const step = getStep();
+
+    if (step > 0) {
+      currentIndex = Math.round(viewport.scrollLeft / step);
+      updateDots();
+    }
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    currentIndex = 0;
+    viewport.scrollLeft = 0;
+    updateDots();
+  });
+
+  // Pause autoplay when the browser tab is hidden.
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
       stopAutoplay();
@@ -1642,14 +1450,8 @@ function initializeShopEase() {
     }
   });
 
-  window.addEventListener("resize", () => {
-    track.style.transition = "none";
-    track.style.transform = "translateX(0)";
-  });
-
   updateDots();
   startAutoplay();
 })();
-
 
 initializeShopEase();

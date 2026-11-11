@@ -2966,439 +2966,47 @@ footer { padding: 40px 7% 0; background: #090912; border-top: 1px solid var(--bo
     transition: none;
   }
 }
+/* ShopEase promotional banner positioning fix */
 
-
-/* ShopEase banner layout correction: keep the carousel in normal document flow. */
-.se-banner-section {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  clear: both;
-  z-index: 1;
+.promo-section {
+    position: relative !important;
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 35px auto 55px;
+    padding: 0 4%;
+    z-index: 1;
+    overflow: hidden;
+    clear: both;
 }
 
-.se-banner-viewport {
-  position: relative;
-  display: block;
-  height: auto;
-  inset: auto;
-  transform: none;
+.promo-section,
+.promo-section * {
+    box-sizing: border-box;
 }
 
-.se-banner-track {
-  position: relative;
+/* Prevent the slider from floating over other sections */
+.promo-section .promo-slider,
+.promo-section .promo-carousel {
+    position: relative !important;
+    width: 100%;
+    height: auto;
+    inset: auto;
+    transform: none;
 }
 
-/* ==========================================
-   ShopEase - Continuous Promotional Slider
-========================================== */
-
-#seBannerViewport {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
+/* Keep products below the promotional section */
+#shop {
+    position: relative;
+    z-index: 0;
+    clear: both;
+    margin-top: 30px;
 }
 
-#seBannerTrack {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  will-change: transform;
+/* Responsive layout */
+@media (max-width: 768px) {
+    .promo-section {
+        padding: 0 15px;
+        margin: 25px auto 35px;
+    }
 }
-
-#seBannerTrack .se-promo-card {
-  flex-shrink: 0;
-}
-
-/* Smooth movement */
-#seBannerTrack {
-  transition: transform 650ms ease-in-out;
-}
-
-/* Active navigation dot */
-#seBannerDots button.active {
-  width: 30px;
-  border-radius: 20px;
-  background: #a98aff;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #seBannerTrack {
-    transition: none !important;
-  }
-}
-
-/* =================================
-   ShopEase Promotional Banner Slider
-================================= */
-
-.se-promo-section {
-  width: 100%;
-  padding: 35px 24px 28px;
-  overflow: hidden;
-  background: #0c0a16;
-  color: #fff;
-}
-
-.se-promo-heading,
-.se-promo-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.se-promo-heading {
-  margin-bottom: 30px;
-}
-
-.se-promo-heading h2 {
-  font-size: 30px;
-  font-weight: 750;
-  margin: 0;
-}
-
-.se-promo-controls {
-  display: flex;
-  gap: 12px;
-}
-
-.se-promo-controls button {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid #494052;
-  background: #191525;
-  color: white;
-  font-size: 27px;
-  cursor: pointer;
-}
-
-#seBannerViewport {
-  width: 100%;
-  overflow: hidden;
-}
-
-#seBannerTrack {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 26px;
-  will-change: transform;
-}
-
-.se-promo-card {
-  position: relative;
-  flex: 0 0 calc((100% - 52px) / 3);
-  min-width: 0;
-  min-height: 345px;
-  padding: 34px;
-  border-radius: 23px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  isolation: isolate;
-}
-
-.promo-purple {
-  background: linear-gradient(120deg, #39245f, #7450a6);
-}
-
-.promo-blue {
-  background: linear-gradient(120deg, #17466a, #347fa3);
-}
-
-.promo-orange {
-  background: linear-gradient(120deg, #71402b, #bd7040);
-}
-
-.promo-pink {
-  background: linear-gradient(120deg, #633052, #a35287);
-}
-
-.promo-content {
-  position: relative;
-  z-index: 2;
-  width: 58%;
-}
-
-.promo-content span {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-.promo-content h2 {
-  font-size: clamp(23px, 2.2vw, 37px);
-  line-height: 1.2;
-  margin: 24px 0 15px;
-  font-weight: 800;
-}
-
-.promo-content p {
-  font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-.promo-content button {
-  border: none;
-  border-radius: 10px;
-  padding: 14px 19px;
-  background: white;
-  color: #21182d;
-  font-weight: 750;
-  cursor: pointer;
-}
-
-.se-promo-card img {
-  width: 39%;
-  height: 205px;
-  object-fit: cover;
-  border-radius: 4px;
-  position: relative;
-  z-index: 1;
-}
-
-.promo-number {
-  position: absolute;
-  right: 20px;
-  bottom: 17px;
-  color: #ffffffa8;
-}
-
-.se-promo-bottom {
-  margin-top: 25px;
-  color: #a9a0bc;
-  font-size: 13px;
-}
-
-#seBannerDots {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-#seBannerDots button {
-  width: 10px;
-  height: 10px;
-  border: none;
-  border-radius: 20px;
-  background: #625875;
-  cursor: pointer;
-  transition: width 0.3s, background 0.3s;
-}
-
-#seBannerDots button.active {
-  width: 30px;
-  background: #a98aff;
-}
-
-@media (max-width: 900px) {
-  .se-promo-card {
-    flex-basis: calc((100% - 26px) / 2);
-  }
-}
-
-@media (max-width: 600px) {
-  .se-promo-section {
-    padding: 25px 15px;
-  }
-
-  .se-promo-card {
-    flex-basis: 100%;
-    min-height: 300px;
-    padding: 22px;
-  }
-
-  .se-promo-card img {
-    width: 36%;
-    height: 150px;
-  }
-
-  .promo-content h2 {
-    font-size: 25px;
-  }
-
-  .se-promo-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
-
-/* =========================================
-   ShopEase - Final Promotional Slider Fix
-========================================= */
-
-.se-banner-section {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 45px 5%;
-  overflow: hidden;
-  clear: both;
-  background: #0b0b18;
-  z-index: 1;
-}
-
-.se-banner-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 28px;
-}
-
-.se-banner-header h2 {
-  margin: 5px 0 0;
-  font-size: 30px;
-  font-weight: 800;
-}
-
-.se-banner-controls {
-  display: flex;
-  gap: 12px;
-}
-
-.se-banner-controls button {
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgba(255,255,255,.15);
-  border-radius: 50%;
-  background: #191729;
-  color: white;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-.se-banner-viewport {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.se-banner-track {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  gap: 26px;
-  transform: translateX(0);
-  transition: transform .65s ease-in-out;
-  will-change: transform;
-}
-
-.se-banner-track .se-promo-card {
-  flex: 0 0 calc((100% - 52px) / 3);
-  min-width: 0;
-  height: 345px;
-  position: relative;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.se-promo-content {
-  position: relative;
-  z-index: 2;
-  width: 58%;
-}
-
-.se-promo-content h3 {
-  font-size: clamp(23px, 2.2vw, 36px);
-  line-height: 1.2;
-  margin: 20px 0 14px;
-}
-
-.se-promo-content p {
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.se-banner-track .se-promo-card img {
-  position: absolute;
-  right: 18px;
-  top: 50%;
-  width: 37%;
-  height: 70%;
-  object-fit: contain;
-  transform: translateY(-50%);
-  z-index: 1;
-}
-
-.se-banner-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  margin-top: 18px;
-}
-
-.se-banner-dots {
-  display: flex;
-  gap: 8px;
-}
-
-.se-banner-dots button {
-  width: 9px;
-  height: 9px;
-  padding: 0;
-  border: 0;
-  border-radius: 20px;
-  background: #625b76;
-  cursor: pointer;
-  transition: width .3s, background .3s;
-}
-
-.se-banner-dots button.active {
-  width: 28px;
-  background: #a98aff;
-}
-
-@media (max-width: 900px) {
-  .se-banner-track .se-promo-card {
-    flex-basis: calc((100% - 26px) / 2);
-  }
-}
-
-@media (max-width: 600px) {
-  .se-banner-section {
-    padding: 30px 18px;
-  }
-
-  .se-banner-header h2 {
-    font-size: 23px;
-  }
-
-  .se-banner-track .se-promo-card {
-    flex-basis: 100%;
-    height: 250px;
-    padding: 22px;
-  }
-
-  .se-promo-content {
-    width: 62%;
-  }
-
-  .se-promo-content h3 {
-    font-size: 23px;
-  }
-
-  .se-banner-track .se-promo-card img {
-    width: 35%;
-    right: 10px;
-  }
-
-  .se-banner-bottom > span {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .se-banner-track {
-    transition: none !important;
-  }
-}
-

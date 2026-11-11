@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0b0b18">
-  <title>ShopEase | Discover Something Better</title>
+  <title>ShopEase 4.0 | Electronics, Upgraded</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 </head>
 <body>
   <div class="announcement">
-    ✦ Discover something better. Free shipping on orders over ₹1,999.
+    ✦ Shop smarter. Discover the latest technology with ShopEase.
   </div>
 
   <header class="header">
@@ -31,10 +31,6 @@
       
 
 
-
-
-
-
     <div class="header-actions">
       <button class="icon-btn" id="accountBtn" aria-label="Account">♙</button>
       <button class="icon-btn" id="wishlistBtn" aria-label="Wishlist">
@@ -46,19 +42,104 @@
     </div>
   </header>
 
+<!-- ShopEase Landscape Promotional Carousel -->
+
+<section class="se-banner-section" aria-label="ShopEase offers">
+
+  <div class="se-banner-header">
+    <div>
+      <span class="se-banner-label">SHOP THE LATEST</span>
+      <h2>Offers you’ll love.</h2>
+    </div>
+
+    <div class="se-banner-controls">
+      <button id="seBannerPrev" aria-label="Previous banners">‹</button>
+      <button id="seBannerNext" aria-label="Next banners">›</button>
+    </div>
+  </div>
+
+  <div class="se-banner-viewport" id="seBannerViewport">
+    <div class="se-banner-track" id="seBannerTrack">
+
+      <!-- Banner 1 -->
+      <article class="se-promo-card se-promo-purple">
+        <div class="se-promo-content">
+          <span class="se-promo-tag">TECH COLLECTION</span>
+          <h3>Sound without limits.</h3>
+          <p>Discover your next favourite headphones.</p>
+          <a href="#shop">Explore electronics ↗</a>
+        </div>
+        <img src="./images/products/wireless-headphones.jpg"
+             alt="Wireless headphones">
+        <span class="se-promo-number">01</span>
+      </article>
+
+      <!-- Banner 2 -->
+      <article class="se-promo-card se-promo-blue">
+        <div class="se-promo-content">
+          <span class="se-promo-tag">SMART LIVING</span>
+          <h3>Make every second smarter.</h3>
+          <p>Explore smart watches and accessories.</p>
+          <a href="#shop">Discover more ↗</a>
+        </div>
+        <img src="./images/products/smart-watch.jpg"
+             alt="Smart watch">
+        <span class="se-promo-number">02</span>
+      </article>
+
+      <!-- Banner 3 -->
+      <article class="se-promo-card se-promo-orange">
+        <div class="se-promo-content">
+          <span class="se-promo-tag">EVERYDAY ESSENTIALS</span>
+          <h3>Power your day.</h3>
+          <p>Stay connected wherever you go.</p>
+          <a href="#shop">Shop accessories ↗</a>
+        </div>
+        <img src="./images/products/bluetooth-speaker.jpg"
+             alt="Bluetooth speaker">
+        <span class="se-promo-number">03</span>
+      </article>
+
+      <!-- Banner 4 -->
+      <article class="se-promo-card se-promo-pink">
+        <div class="se-promo-content">
+          <span class="se-promo-tag">WORKSPACE UPGRADE</span>
+          <h3>Build your perfect setup.</h3>
+          <p>Upgrade your everyday workspace.</p>
+          <a href="#shop">Shop workspace ↗</a>
+        </div>
+        <img src="./images/products/mechanical-keyboard.jpg"
+             alt="Mechanical keyboard">
+        <span class="se-promo-number">04</span>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="se-banner-bottom">
+    <div class="se-banner-dots" id="seBannerDots">
+      <button class="active" aria-label="Go to banner 1"></button>
+      <button aria-label="Go to banner 2"></button>
+    </div>
+    <span>Discover something better with ShopEase.</span>
+  </div>
+
+</section>
+
+
   <main>
     <section class="hero" id="home">
       <div class="hero-content">
         <span class="eyebrow"><span class="live-dot"></span> THE NEW SHOPPING EXPERIENCE</span>
-        <h1>Find your next<br> <span>favourite thing.</span></h1>
-        <p>Thoughtfully picked essentials, standout designs and everyday upgrades. All in one place.</p>
+        <h1>Technology that<br> <span>moves you forward.</span></h1>
+        <p>Discover smartphones, laptops, tablets and carefully selected tech essentials — all in one place.</p>
         <div class="hero-actions">
           <a class="primary-btn" href="#shop">Explore collection <span>↗</span></a>
           <a class="text-btn" href="#categories">Browse categories ↓</a>
         </div>
         <div class="hero-stats">
-          <div><strong>225+</strong><span>Products</span></div>
-          <div><strong>15</strong><span>Categories</span></div>
+          <div><strong>120+</strong><span>Products</span></div>
+          <div><strong>8</strong><span>Categories</span></div>
           <div><strong>24/7</strong><span>Browse online</span></div>
         </div>
       </div>
@@ -72,101 +153,17 @@
         </div>
         <div class="floating-card floating-top">
           <span class="mini-icon">✦</span>
-          <div><strong>Curated for you</strong><small>Everyday upgrades</small></div>
+          <div><strong>Tech picked for you</strong><small>Smarter everyday upgrades</small></div>
         </div>
         <div class="floating-card floating-bottom">
           <span class="mini-icon">↗</span>
-          <div><strong>Discover more</strong><small>Your next favourite find</small></div>
+          <div><strong>Explore technology</strong><small>Your next favourite device</small></div>
         </div>
       </div>
-    </section>
-
-    <!-- ShopEase Landscape Promotional Carousel -->
-    
-    <section class="se-banner-section" aria-label="ShopEase offers">
-    
-      <div class="se-banner-header">
-        <div>
-          <span class="se-banner-label">SHOP THE LATEST</span>
-          <h2>Offers you’ll love.</h2>
-        </div>
-    
-        <div class="se-banner-controls">
-          <button id="seBannerPrev" aria-label="Previous banners">‹</button>
-          <button id="seBannerNext" aria-label="Next banners">›</button>
-        </div>
-      </div>
-    
-      <div class="se-banner-viewport" id="seBannerViewport">
-        <div class="se-banner-track" id="seBannerTrack">
-    
-          <!-- Banner 1 -->
-          <article class="se-promo-card se-promo-purple">
-            <div class="se-promo-content">
-              <span class="se-promo-tag">TECH COLLECTION</span>
-              <h3>Sound without limits.</h3>
-              <p>Discover your next favourite headphones.</p>
-              <a href="#shop">Explore electronics ↗</a>
-            </div>
-            <img src="./images/products/wireless-headphones.jpg"
-                 alt="Wireless headphones">
-            <span class="se-promo-number">01</span>
-          </article>
-    
-          <!-- Banner 2 -->
-          <article class="se-promo-card se-promo-blue">
-            <div class="se-promo-content">
-              <span class="se-promo-tag">SMART LIVING</span>
-              <h3>Make every second smarter.</h3>
-              <p>Explore smart watches and accessories.</p>
-              <a href="#shop">Discover more ↗</a>
-            </div>
-            <img src="./images/products/smart-watch.jpg"
-                 alt="Smart watch">
-            <span class="se-promo-number">02</span>
-          </article>
-    
-          <!-- Banner 3 -->
-          <article class="se-promo-card se-promo-orange">
-            <div class="se-promo-content">
-              <span class="se-promo-tag">EVERYDAY ESSENTIALS</span>
-              <h3>Power your day.</h3>
-              <p>Stay connected wherever you go.</p>
-              <a href="#shop">Shop accessories ↗</a>
-            </div>
-            <img src="./images/products/bluetooth-speaker.jpg"
-                 alt="Bluetooth speaker">
-            <span class="se-promo-number">03</span>
-          </article>
-    
-          <!-- Banner 4 -->
-          <article class="se-promo-card se-promo-pink">
-            <div class="se-promo-content">
-              <span class="se-promo-tag">WORKSPACE UPGRADE</span>
-              <h3>Build your perfect setup.</h3>
-              <p>Upgrade your everyday workspace.</p>
-              <a href="#shop">Shop workspace ↗</a>
-            </div>
-            <img src="./images/products/mechanical-keyboard.jpg"
-                 alt="Mechanical keyboard">
-            <span class="se-promo-number">04</span>
-          </article>
-    
-        </div>
-      </div>
-    
-      <div class="se-banner-bottom">
-        <div class="se-banner-dots" id="seBannerDots">
-          <button class="active" aria-label="Go to banner 1"></button>
-          <button aria-label="Go to banner 2"></button>
-        </div>
-        <span>Discover something better with ShopEase.</span>
-      </div>
-    
     </section>
 
     <section class="benefits">
-      <div><span>✧</span><div><strong>Curated collection</strong><small>Explore all your favourites</small></div></div>
+      <div><span>✧</span><div><strong>Trusted tech range</strong><small>Devices for every need</small></div></div>
       <div><span>◇</span><div><strong>Secure demo checkout</strong><small>No real payments processed</small></div></div>
       <div><span>↺</span><div><strong>Easy order tracking</strong><small>Review saved demo orders</small></div></div>
     </section>
@@ -174,21 +171,21 @@
     <section class="section categories-section" id="categories">
       <div class="section-heading">
         <div><span class="eyebrow">EXPLORE YOUR INTERESTS</span><h2>Shop by category<span class="accent">.</span></h2></div>
-        <span class="subtle">15 collections to discover</span>
+        <span class="subtle">8 electronics collections to discover</span>
       </div>
       <div class="category-grid" id="categoryGrid"></div>
     </section>
 
     <section class="section shop-section" id="shop">
       <div class="section-heading">
-        <div><span class="eyebrow">THE SHOP</span><h2>Made for your everyday<span class="accent">.</span></h2></div>
-        <span class="subtle" id="resultCount">225 products</span>
+        <div><span class="eyebrow">THE SHOP</span><h2>Upgrade your setup<span class="accent">.</span></h2></div>
+        <span class="subtle" id="resultCount">120 products</span>
       </div>
 
       <div class="shop-toolbar">
         <label class="search-box">
           <span>⌕</span>
-          <input id="searchInput" type="search" placeholder="Search 225 products..." autocomplete="off">
+          <input id="searchInput" type="search" placeholder="Search phones, laptops, tablets and more..." autocomplete="off">
           <kbd>/</kbd>
         </label>
         <select id="sortSelect" aria-label="Sort products">
@@ -213,7 +210,7 @@
     </section>
 
     <section class="promo">
-      <div><span class="eyebrow">YOUR NEXT DISCOVERY</span><h2>Good finds.<br><span>Better everyday.</span></h2><p>Explore a collection built around the things you love.</p></div>
+      <div><span class="eyebrow">YOUR NEXT UPGRADE</span><h2>Better tech.<br><span>Better possibilities.</span></h2><p>Find the devices and accessories that fit your world.</p></div>
       <a class="primary-btn" href="#shop">Explore all products ↗</a>
       <div class="promo-orb"></div>
     </section>
@@ -245,7 +242,7 @@
 
   <footer id="footer">
     <div class="footer-main">
-      <div><a class="logo" href="#"><span class="logo-mark">S</span> ShopEase<span class="logo-dot">.</span></a><p>Discover something better.<br>Your everyday shopping destination.</p></div>
+      <div><a class="logo" href="#"><span class="logo-mark">S</span> ShopEase<span class="logo-dot">.</span></a><p>Your destination for smarter technology.<br>Discover something better.</p></div>
       <div><strong>Explore</strong><a href="#shop">All products</a><a href="#categories">Categories</a><a href="#home">Featured collection</a></div>
       <div><strong>Your account</strong><a href="#account">Profile</a><a href="#account" id="footerOrdersLink">Orders</a><a href="#account" id="footerWishlistLink">Wishlist</a></div>
     </div>
@@ -288,7 +285,7 @@
   <section class="modal hidden" id="checkoutModal" role="dialog" aria-modal="true" aria-label="Checkout">
     <button class="close-btn modal-close" data-close aria-label="Close">✕</button>
     <span class="eyebrow">ALMOST YOURS</span><h2>Checkout.</h2>
-    <p class="modal-description">Enter delivery details to create a demo order. No payment will be taken.</p>
+    <p class="modal-description">Enter delivery details to create a demo order. Razorpay will be connected in a later integration step.</p>
     <div class="checkout-summary" id="checkoutSummary"></div>
     <form id="checkoutForm">
       <label class="form-field">Full name<input id="shippingName" required autocomplete="name" placeholder="Recipient name"></label>
