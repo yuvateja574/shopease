@@ -172,38 +172,89 @@ const photoByCategory = [
 
 // Individual product images.
 // Keep these names and filenames exactly the same as your actual files.
+
+
 const photoByProduct = {
-  "Wireless Headphones": "./images/products/wireless-headphones.jpg",
-  "Smart Watch": "./images/products/smart-watch.jpg",
-  "Bluetooth Speaker": "./images/products/bluetooth-speaker.jpg",
-  "Mechanical Keyboard": "./images/products/mechanical-keyboard.jpg",
-  "Wireless Mouse": "./images/products/wireless-mouse.jpg",
-  "Portable Charger": "./images/products/portable charger.jpg",
-  "USB-C Hub": "./images/products/USB-c hub.webp",
-  "Webcam HD": "./images/products/webcam hd.jpg",
-  "Gaming Controller": "./images/products/game controller.jpg",
-  "Desk Lamp": "./images/products/desk lamp.jpg",
-  "Tablet Stand": "./images/products/tablet stand.jpg",
-  "Laptop Sleeve": "./images/products/laptop sleeve.jpg",
-  "Earbuds Pro": "./images/products/earbuds pro.jpg",
-  "Power Bank": "./images/products/power bank.jpg",
-  "Monitor Light": "./images/products/monitor light.jpg"
+    // Smartphones
+    "Apple iPhone 16": "./images/products/apple iphone 16.jpg",
+    "Google Pixel 9": "./images/products/Google Pixel 9.jpg",
+    "iPhone 16 Plus": "./images/products/iPhone 16 Plus.jpg",
+    "iPhone 16 Pro": "./images/products/iPhone 16 Pro.jpg",
+    "Motorola Edge 60": "./images/products/Motorola Edge 60.jpg",
+    "Nothing Phone 3": "./images/products/Nothing Phone 3.jpg",
+    "OnePlus 13": "./images/products/OnePlus 13.jpg",
+    "OnePlus Nord 5": "./images/products/OnePlus Nord 5.jpg",
+    "Realme GT 7 Pro": "./images/products/Realme GT 7 Pro.jpg",
+    "Redmi Note 14 Pro": "./images/products/Redmi Note 14 Pro.jpg",
+    "Samsung Galaxy S25": "./images/products/Samsung Galaxy S25.jpg",
+    "Vivo V50": "./images/products/Vivo V50.jpg",
+    "Xiaomi 14": "./images/products/Xiaomi 14.jpg"
 };
+
+
+
+
+function detectBrand(name) {
+  const brands = [
+    "Samsung", "Apple", "OnePlus", "Google", "Xiaomi", "Nothing", "Motorola",
+    "Redmi", "Vivo", "Realme", "HP", "Dell", "Lenovo", "ASUS", "Acer",
+    "Microsoft", "MSI", "Sony", "Bose", "JBL", "Sennheiser", "Marshall",
+    "boAt", "Garmin", "Amazfit", "Noise", "Fitbit", "Huawei", "Titan",
+    "Nintendo", "Logitech", "Razer", "HyperX", "SteelSeries", "Elgato",
+    "Corsair", "LG", "BenQ", "Gigabyte", "ViewSonic", "AOC", "Anker",
+    "SanDisk", "Keychron", "TP-Link", "Belkin", "Portronics", "Ugreen"
+  ];
+
+  if (/^(iPhone|MacBook|iPad|Apple Watch|AirPods)\b/i.test(name)) return "Apple";
+  if (/^(PlayStation|DualSense)\b/i.test(name)) return "Sony";
+  if (/^Xbox\b/i.test(name)) return "Microsoft";
+
+  return brands.find(brand => new RegExp(`^${brand}\\b`, "i").test(name))
+    || name.split(" ")[0];
+}
 
 const products = categories.flatMap((category, categoryIndex) =>
   category.names.map((name, itemIndex) => {
     const id = categoryIndex * 15 + itemIndex + 1;
+
     const priceRanges = [
       [6999, 59999], [24999, 149999], [8999, 89999], [799, 34999],
       [1499, 49999], [999, 89999], [5999, 79999], [299, 24999]
     ];
+
     const [minPrice, maxPrice] = priceRanges[categoryIndex];
     const price = minPrice + ((id * 137 + categoryIndex * 89) % (maxPrice - minPrice + 1));
-    const discount = [10, 15, 20, 25][id % 4];
+    const discount = [10, 15, 20, 25, 30][id % 5];
+    const brand = detectBrand(name);
+
+    const ramOptions = categoryIndex === 0 ? ["4GB", "6GB", "8GB", "12GB", "16GB"] :
+      categoryIndex === 1 ? ["8GB", "16GB", "32GB"] :
+      categoryIndex === 2 ? ["4GB", "6GB", "8GB", "12GB"] : [];
+
+    const storageOptions = categoryIndex === 0 ? ["128GB", "256GB", "512GB", "1TB"] :
+      categoryIndex === 1 ? ["256GB SSD", "512GB SSD", "1TB SSD"] :
+      categoryIndex === 2 ? ["64GB", "128GB", "256GB", "512GB"] : [];
+
+    const processorOptions = categoryIndex === 1
+      ? ["Intel Core i5", "Intel Core i7", "AMD Ryzen 5", "AMD Ryzen 7", "Apple M-series"]
+      : categoryIndex === 0 ? ["Snapdragon", "Apple A-series", "MediaTek", "Google Tensor"] : [];
+
+    const ram = ramOptions.length ? ramOptions[(id * 3) % ramOptions.length] : "";
+    const storage = storageOptions.length ? storageOptions[(id * 5) % storageOptions.length] : "";
+    const processor = processorOptions.length ? processorOptions[(id * 7) % processorOptions.length] : "";
+
+    const network = categoryIndex === 0 ? (itemIndex % 4 === 0 ? "4G" : "5G") :
+      categoryIndex === 2 ? (itemIndex % 3 === 0 ? "Wi-Fi" : "5G") : "";
 
     return {
       id,
       name,
+      brand,
+      ram,
+      storage,
+      processor,
+      network,
+      popularity: 500 - ((id * 37) % 490),
       category: category.name,
       categoryIndex,
       price,
@@ -223,8 +274,13 @@ const products = categories.flatMap((category, categoryIndex) =>
 
 // Debug check for the first mapped product.
 console.log(
-  "Wireless Headphones image:",
-  photoByProduct["Wireless Headphones"]
+    "Apple iPhone 16 image:",
+    photoByProduct["Apple iPhone 16"]
+);
+
+console.log(
+    "Generated product:",
+    products.find(product => product.name === "Apple iPhone 16")
 );
 
 console.log(
@@ -283,6 +339,7 @@ document.addEventListener("error", event => {
     img.src = "https://placehold.co/650x650/19192c/c9bbff?text=ShopEase";
   }
 }, true);
+
 function saveCart() {
   writeStore(STORAGE.cart, cart);
   updateCounts();
@@ -338,6 +395,71 @@ function renderFilters() {
   `).join("");
 }
 
+function setSelectOptions(select, values, firstLabel) {
+  if (!select) return;
+
+  const previous = select.value;
+
+  const uniqueValues = [...new Set(values.filter(Boolean))].sort((a, b) =>
+    a.localeCompare(b, undefined, { numeric: true })
+  );
+
+  select.innerHTML = `<option value="">${firstLabel}</option>` +
+    uniqueValues.map(value =>
+      `<option value="${escapeHTML(value)}">${escapeHTML(value)}</option>`
+    ).join("");
+
+  if (uniqueValues.includes(previous)) select.value = previous;
+}
+
+function renderAdvancedFilters() {
+  const scope = products.filter(product =>
+    activeCategory === "All Products" || product.category === activeCategory
+  );
+
+  setSelectOptions(
+    $("#brandFilter"),
+    scope.map(product => product.brand),
+    "All brands"
+  );
+
+  const categoryIndex = activeCategory === "All Products"
+    ? -1
+    : categories.findIndex(category => category.name === activeCategory);
+
+  const showDeviceSpecs = categoryIndex === -1 ||
+    (categoryIndex >= 0 && categoryIndex <= 2);
+      ["ramFilterWrap", "storageFilterWrap"].forEach(id =>
+    $("#" + id).classList.toggle("hidden", !showDeviceSpecs)
+  );
+
+  $("#processorFilterWrap").classList.toggle(
+    "hidden",
+    categoryIndex !== -1 && categoryIndex !== 0 && categoryIndex !== 1
+  );
+
+  $("#networkFilterWrap").classList.toggle(
+    "hidden",
+    categoryIndex !== -1 && categoryIndex !== 0 && categoryIndex !== 2
+  );
+
+  const specScope = categoryIndex === -1
+    ? scope.filter(product => product.categoryIndex <= 2)
+    : scope;
+
+  setSelectOptions($("#ramFilter"), specScope.map(product => product.ram), "Any RAM");
+  setSelectOptions($("#storageFilter"), specScope.map(product => product.storage), "Any storage");
+  setSelectOptions($("#processorFilter"), specScope.map(product => product.processor), "Any processor");
+}
+
+function clearAdvancedFilters() {
+  ["brandFilter", "priceFilter", "ramFilter", "storageFilter", "processorFilter", "networkFilter"]
+    .forEach(id => { if ($("#" + id)) $("#" + id).value = ""; });
+
+  visibleLimit = 16;
+  renderProducts();
+}
+
 function getFilteredProducts() {
   const query = $("#searchInput").value.trim().toLowerCase();
 
@@ -352,10 +474,38 @@ function getFilteredProducts() {
     const queryMatch =
       !query ||
       product.name.toLowerCase().includes(query) ||
+      product.brand.toLowerCase().includes(query) ||
       product.category.toLowerCase().includes(query) ||
+      product.ram.toLowerCase().includes(query) ||
+      product.storage.toLowerCase().includes(query) ||
+      product.processor.toLowerCase().includes(query) ||
       product.description.toLowerCase().includes(query);
 
-    return categoryMatch && wishlistMatch && queryMatch;
+    const brandMatch = !$("#brandFilter")?.value ||
+      product.brand === $("#brandFilter").value;
+
+    const priceRange = $("#priceFilter")?.value || "";
+    const [minPrice, maxPrice] = priceRange
+      ? priceRange.split("-").map(Number)
+      : [0, Infinity];
+
+    const priceMatch =
+      product.price >= minPrice && product.price <= maxPrice;
+
+    const ramMatch = !$("#ramFilter")?.value ||
+      product.ram === $("#ramFilter").value;
+
+    const storageMatch = !$("#storageFilter")?.value ||
+      product.storage === $("#storageFilter").value;
+
+    const processorMatch = !$("#processorFilter")?.value ||
+      product.processor === $("#processorFilter").value;
+
+    const networkMatch = !$("#networkFilter")?.value ||
+      product.network === $("#networkFilter").value;
+
+    return categoryMatch && wishlistMatch && queryMatch && brandMatch &&
+      priceMatch && ramMatch && storageMatch && processorMatch && networkMatch;
   });
 
   switch ($("#sortSelect").value) {
@@ -369,6 +519,18 @@ function getFilteredProducts() {
 
     case "rating":
       result.sort((a, b) => b.rating - a.rating);
+      break;
+
+    case "popular":
+      result.sort((a, b) => b.popularity - a.popularity);
+      break;
+
+    case "newest":
+      result.sort((a, b) => b.id - a.id);
+      break;
+
+    case "discount":
+      result.sort((a, b) => b.discount - a.discount);
       break;
 
     case "name":
@@ -407,7 +569,6 @@ function renderProducts() {
   $("#productGrid").innerHTML = visible.map(product => `
     <article class="product-card">
       <div class="product-image-wrap" data-view="${product.id}">
-
         <img
           src="${productImage(product)}"
           alt="${escapeHTML(product.name)}"
@@ -443,6 +604,12 @@ function renderProducts() {
           ${escapeHTML(product.name)}
         </h3>
 
+        <div class="product-spec-line">
+          <span>${escapeHTML(product.brand)}</span>
+          ${product.ram ? `<span>${escapeHTML(product.ram)} RAM</span>` : ""}
+          ${product.storage ? `<span>${escapeHTML(product.storage)}</span>` : ""}
+        </div>
+
         <div class="product-rating">
           ★ ${product.rating}
           <span>(${product.reviews} reviews)</span>
@@ -468,6 +635,7 @@ function renderProducts() {
   `).join("");
 
   renderFilters();
+  renderAdvancedFilters();
 
   $$(".category-card").forEach(button => {
     button.classList.toggle(
@@ -481,6 +649,18 @@ function setCategory(category) {
   activeCategory = category;
   wishlistOnly = false;
   visibleLimit = 16;
+
+  [
+    "brandFilter",
+    "priceFilter",
+    "ramFilter",
+    "storageFilter",
+    "processorFilter",
+    "networkFilter"
+  ].forEach(id => {
+    if ($("#" + id)) $("#" + id).value = "";
+  });
+
   renderProducts();
 }
 
@@ -492,6 +672,7 @@ function resetFilters() {
   $("#searchInput").value = "";
   $("#sortSelect").value = "featured";
 
+  clearAdvancedFilters();
   renderProducts();
 }
 
@@ -681,7 +862,7 @@ function renderWishlist() {
     container.innerHTML = `
       <div class="drawer-empty">
         <span>♡</span>
-        <h3>Nothing saved just yet.</h3>
+                <h3>Nothing saved just yet.</h3>
         <p>Tap the heart on any product to save it here.</p>
         <button class="primary-btn" data-shop-now>
           Discover products
@@ -722,6 +903,7 @@ function renderWishlist() {
     `;
   }).join("");
 }
+
 /* ---------------- Drawer and modal handling ---------------- */
 
 function openPanel(element) {
@@ -776,6 +958,12 @@ function openProduct(id) {
         </span>
 
         <h2>${escapeHTML(product.name)}</h2>
+
+        <div class="product-spec-line">
+          <span>${escapeHTML(product.brand)}</span>
+          ${product.ram ? `<span>${escapeHTML(product.ram)} RAM</span>` : ""}
+          ${product.storage ? `<span>${escapeHTML(product.storage)}</span>` : ""}
+        </div>
 
         <div class="product-rating">
           ★ ${product.rating}
@@ -1075,7 +1263,7 @@ $("#checkoutForm").addEventListener("submit", event => {
 
       return {
         id: item.id,
-        name: product.name,
+                name: product.name,
         price: product.price,
         qty: item.qty
       };
@@ -1108,6 +1296,7 @@ $("#checkoutForm").addEventListener("submit", event => {
 
   showToast("Demo order placed successfully!");
 });
+
 /* ---------------- Click handling ---------------- */
 
 // Delegated events keep dynamically generated product buttons working.
@@ -1240,6 +1429,25 @@ $("#searchInput").addEventListener("input", () => {
 });
 
 $("#sortSelect").addEventListener("change", renderProducts);
+
+[
+  "brandFilter",
+  "priceFilter",
+  "ramFilter",
+  "storageFilter",
+  "processorFilter",
+  "networkFilter"
+].forEach(id =>
+  $("#" + id).addEventListener("change", () => {
+    visibleLimit = 16;
+    renderProducts();
+  })
+);
+
+$("#clearAdvancedFilters").addEventListener(
+  "click",
+  clearAdvancedFilters
+);
 
 $("#loadMoreBtn").addEventListener("click", () => {
   visibleLimit += 16;
@@ -1454,4 +1662,5 @@ function initializeShopEase() {
   startAutoplay();
 })();
 
+// Start the website.
 initializeShopEase();

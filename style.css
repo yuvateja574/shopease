@@ -3010,3 +3010,87 @@ footer { padding: 40px 7% 0; background: #090912; border-top: 1px solid var(--bo
         margin: 25px auto 35px;
     }
 }
+
+/* ShopEase 4.0 — brand and customer-requirement filters */
+.advanced-filters {
+  margin: 18px 0 24px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #151426, #10101e);
+}
+.advanced-filters-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.advanced-filters-heading strong,
+.advanced-filters-heading span { display: block; }
+.advanced-filters-heading strong {
+  font: 700 13px Manrope, sans-serif;
+}
+.advanced-filters-heading span,
+.catalog-note {
+  color: var(--muted);
+  font-size: 10px;
+}
+.clear-filter-btn {
+  border: 1px solid #a58bff55;
+  background: #a58bff12;
+  color: #d4c8ff;
+  border-radius: 8px;
+  padding: 8px 11px;
+  font-size: 10px;
+}
+.advanced-filter-controls {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+.filter-control {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+  color: #c9c5dc;
+  font-size: 10px;
+  font-weight: 700;
+}
+.filter-control select {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  padding: 8px 9px;
+  color: var(--text);
+  background: #1a192b;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 10px;
+}
+.product-spec-line {
+  min-height: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 7px;
+}
+.product-spec-line span {
+  padding: 3px 6px;
+  border: 1px solid #a58bff25;
+  border-radius: 5px;
+  background: #a58bff0c;
+  color: #c9baff;
+  font-size: 8px;
+}
+.catalog-note { margin: -12px 0 18px; }
+
+@media (max-width: 1000px) {
+  .advanced-filter-controls { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .advanced-filters { padding: 13px; }
+  .advanced-filter-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .advanced-filters-heading { align-items: flex-start; }
+  .catalog-note { line-height: 1.6; }
+}

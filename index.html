@@ -193,11 +193,57 @@
           <option value="price-low">Price: low to high</option>
           <option value="price-high">Price: high to low</option>
           <option value="rating">Top rated</option>
+          <option value="popular">Most popular</option>
+          <option value="newest">Newest arrivals</option>
+          <option value="discount">Biggest discount</option>
           <option value="name">Name: A to Z</option>
         </select>
       </div>
 
       <div class="filter-row" id="filterRow"></div>
+
+      <div class="advanced-filters" id="advancedFilters" aria-label="Product requirement filters">
+        <div class="advanced-filters-heading">
+          <div>
+            <strong>Find the right device</strong>
+            <span>Filter by brand, budget and specifications</span>
+          </div>
+          <button type="button" class="clear-filter-btn" id="clearAdvancedFilters">Clear filters</button>
+        </div>
+        <div class="advanced-filter-controls">
+          <label class="filter-control">Brand
+            <select id="brandFilter"><option value="">All brands</option></select>
+          </label>
+          <label class="filter-control">Budget
+            <select id="priceFilter">
+              <option value="">Any price</option>
+              <option value="0-10000">Under ₹10,000</option>
+              <option value="10000-20000">₹10,000 – ₹20,000</option>
+              <option value="20000-40000">₹20,000 – ₹40,000</option>
+              <option value="40000-70000">₹40,000 – ₹70,000</option>
+              <option value="70000-150000">₹70,000 – ₹1,50,000</option>
+            </select>
+          </label>
+          <label class="filter-control spec-filter" id="ramFilterWrap">RAM
+            <select id="ramFilter"><option value="">Any RAM</option></select>
+          </label>
+          <label class="filter-control spec-filter" id="storageFilterWrap">Storage
+            <select id="storageFilter"><option value="">Any storage</option></select>
+          </label>
+          <label class="filter-control spec-filter" id="processorFilterWrap">Processor
+            <select id="processorFilter"><option value="">Any processor</option></select>
+          </label>
+          <label class="filter-control spec-filter" id="networkFilterWrap">Network
+            <select id="networkFilter">
+              <option value="">Any network</option>
+              <option value="5G">5G</option>
+              <option value="Wi-Fi">Wi-Fi</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <p class="catalog-note">Brand names identify the listed product ranges. Prices, ratings and generated specification filters are sample demo data, not live retailer listings.</p>
+
       <div class="product-grid" id="productGrid"></div>
       <div class="empty-state hidden" id="emptyState">
         <span>⌕</span><h3>No products found</h3>
