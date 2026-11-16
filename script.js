@@ -1228,64 +1228,44 @@ $("#logoutBtn").addEventListener("click", () => {
 
 /* ---------------- Checkout and order creation ---------------- */
 
-$("#checkoutForm").addEventListener("submit", event => {
-  event.preventDefault();
 
-  if (!cart.length) {
-    closePanels();
-    showToast("Your cart is empty.");
-    return;
-  }
+/* ---------------- Razorpay Checkout Integration ---------------- */
 
-  const subtotal = cartSubtotal();
-  const shipping = subtotal >= 1999 ? 0 : 99;
-
-  const recipient = $("#shippingName").value.trim();
-  const email = $("#shippingEmail").value.trim();
-  const address = $("#shippingAddress").value.trim();
-
-  if (!recipient || !email || !address) {
-    showToast("Please complete all delivery details.");
-    return;
-  }
-
+function saveCompletedOrder({
+  recipient,
+  email,
+  address,
+  payment,
+  total,
+  items,
+  paymentId = "",
+  razorpayOrderId = ""
+}) {
   const order = {
     id: `SE-${Date.now().toString().slice(-9)}`,
     date: new Date().toLocaleString("en-IN"),
-    status: "Demo order placed",
+    status: "Order placed successfully",
     recipient,
     email,
     address,
-    payment: $("#paymentMethod").value,
-
-    items: cart.map(item => {
-      const product = getProduct(item.id);
-
-      return {
-        id: item.id,
-                name: product.name,
-        price: product.price,
-        qty: item.qty
-      };
-    }),
-
-    total: subtotal + shipping
+    payment,
+    paymentId,
+    razorpayOrderId,
+    items,
+    total
   };
 
   const updatedOrders = [...orders, order];
 
-  // Only clear the cart after the order has been saved.
   if (!writeStore(STORAGE.orders, updatedOrders)) {
-    return;
+    return false;
   }
 
   orders = updatedOrders;
   cart = [];
 
   if (!writeStore(STORAGE.cart, cart)) {
-    showToast(
-      "Order saved, but cart cleanup failed. Please review your cart."
-    );
+    showToast("Order saved, but cart cleanup failed.");
   }
 
   updateCounts();
@@ -1294,8 +1274,178 @@ $("#checkoutForm").addEventListener("submit", event => {
   renderOrders();
   openOrders();
 
-  showToast("Demo order placed successfully!");
+  showToast("ShopEase order placed successfully!");
+  return true;
+}
+
+$("#checkoutForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!cart.length) {
+    showToast("Your cart is empty.");
+    return;
+  }
+
+  const recipient = $("#shippingName").value.trim();
+  const email = $("#shippingEmail").value.trim();
+  const address = $("#shippingAddress").value.trim();
+  const paymentMethod = $("#paymentMethod").value;
+
+  if (!recipient || !email || !address) {
+    showToast("Please complete all delivery details.");
+    return;
+  }
+
+  const subtotal = cartSubtotal();
+  const shipping = subtotal >= 1999 ? 0 : 99;
+  const total = subtotal + shipping;
+
+  // Keep a snapshot of the cart for this checkout.
+  const items = cart.map(item => {
+    const product = getProduct(item.id);
+
+    return {
+      id: item.id,
+      name: product.name,
+      price: product.price,
+      qty: item.qty
+    };
+  });
+
+  const submitButton = $("#checkoutForm button[type='submit']");
+  const originalButtonText = submitButton.textContent;
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Processing...";
+
+  try {
+
+    // Option 1: Existing demo cash-on-delivery flow.
+    if (paymentMethod === "Cash on delivery (demo)") {
+      saveCompletedOrder({
+        recipient,
+        email,
+        address,
+        payment: paymentMethod,
+        total,
+        items
+      });
+
+      return;
+    }
+
+    // Option 2: Razorpay test checkout.
+    if (paymentMethod !== "Razorpay (test mode)") {
+      showToast("Please select a valid payment method.");
+      return;
+    }
+
+    if (typeof window.Razorpay !== "function") {
+      showToast("Razorpay Checkout could not be loaded.");
+      return;
+    }
+
+    // Ask the backend to create a Razorpay order.
+    const orderResponse = await fetch(
+      "http://localhost:5000/api/payment/create-order",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          amount: total
+        })
+      }
+    );
+
+    const orderData = await orderResponse.json();
+
+    if (!orderResponse.ok || !orderData.success) {
+      throw new Error(
+        orderData.message || "Could not create payment order."
+      );
+    }
+
+    const options = {
+      key: orderData.keyId,
+      amount: orderData.amount,
+      currency: orderData.currency,
+      name: "ShopEase",
+      description: "ShopEase 4.0 test purchase",
+      order_id: orderData.orderId,
+
+      prefill: {
+        name: recipient,
+        email: email
+      },
+
+      theme: {
+        color: "#9278ff"
+      },
+
+      handler: async function (paymentResponse) {
+        try {
+          // Verify the payment with our backend.
+          const verifyResponse = await fetch(
+            "http://localhost:5000/api/payment/verify",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(paymentResponse)
+            }
+          );
+
+          const verifyData = await verifyResponse.json();
+
+          if (!verifyResponse.ok || !verifyData.success) {
+            showToast(
+              verifyData.message || "Payment verification failed."
+            );
+            return;
+          }
+
+          // Save the order only after successful verification.
+          saveCompletedOrder({
+            recipient,
+            email,
+            address,
+            payment: "Razorpay (test mode)",
+            total,
+            items,
+            paymentId: verifyData.paymentId,
+            razorpayOrderId: verifyData.orderId
+          });
+
+        } catch (error) {
+          console.error("Payment verification error:", error);
+          showToast("Unable to verify payment. Please check your orders before retrying.");
+        }
+      }
+    };
+
+    const razorpayCheckout = new window.Razorpay(options);
+
+    razorpayCheckout.on("payment.failed", function (response) {
+      console.error("Payment failed:", response.error);
+      showToast("Payment was not completed. Your cart is still saved.");
+    });
+
+    razorpayCheckout.open();
+
+  } catch (error) {
+    console.error("Checkout error:", error);
+    showToast(error.message || "Checkout could not be completed.");
+
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
+  }
 });
+
+
 
 /* ---------------- Click handling ---------------- */
 

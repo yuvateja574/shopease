@@ -1,0 +1,16 @@
+{
+  "name": "shopease-payment-server",
+  "version": "1.0.0",
+  "description": "ShopEase 4.0 Razorpay test payment backend",
+  "main": "a.js",
+  "scripts": {
+    "start": "node a.js",
+    "dev": "node --watch a.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "razorpay": "^2.9.8"
+  }
+}

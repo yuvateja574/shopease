@@ -10,7 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
+<script src="script.js" defer></script>
 </head>
 <body>
   <div class="announcement">
@@ -331,13 +332,30 @@
   <section class="modal hidden" id="checkoutModal" role="dialog" aria-modal="true" aria-label="Checkout">
     <button class="close-btn modal-close" data-close aria-label="Close">✕</button>
     <span class="eyebrow">ALMOST YOURS</span><h2>Checkout.</h2>
-    <p class="modal-description">Enter delivery details to create a demo order. Razorpay will be connected in a later integration step.</p>
+    <p class="modal-description">
+  Enter your delivery details and select a payment method.
+</p>
+  Enter your delivery details and select a payment method.
+</p>
     <div class="checkout-summary" id="checkoutSummary"></div>
     <form id="checkoutForm">
       <label class="form-field">Full name<input id="shippingName" required autocomplete="name" placeholder="Recipient name"></label>
       <label class="form-field">Email address<input id="shippingEmail" required type="email" autocomplete="email" placeholder="you@example.com"></label>
       <label class="form-field">Delivery address<textarea id="shippingAddress" required rows="3" autocomplete="street-address" placeholder="House number, street, city, PIN code"></textarea></label>
-      <label class="form-field">Payment method<select id="paymentMethod"><option value="Cash on delivery (demo)">Cash on delivery (demo)</option><option value="Demo payment">Demo payment (no charge)</option></select></label>
+      <label class="form-field">
+  Payment method
+  <select id="paymentMethod" required>
+    <option value="Cash on delivery (demo)">
+      Cash on delivery (demo)
+    </option>
+    <option value="Razorpay (test mode)">
+      Razorpay (test mode)
+    </option>
+  </select>
+</label>
+      <p class="fine-print">
+  Online payments use Razorpay test mode. No real payment should be made.
+</p>
       <p class="fine-print">This frontend demo does not process real payments or send delivery requests.</p>
       <button class="primary-btn full-btn" type="submit">Place demo order ↗</button>
     </form>
